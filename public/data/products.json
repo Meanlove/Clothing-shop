@@ -1,0 +1,184 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Men's Casual Shirt - Blue",
+      "price": 29.99,
+      "image": "https://i.pinimg.com/1200x/9b/60/e2/9b60e28ae765f097871c22bcc14cb6c5.jpg",
+      "category": "men's clothing",
+      "description": "Comfortable casual shirt for everyday wear",
+      "rating": 4.5
+    },
+    {
+      "id": 2,
+      "name": "Men's Casual Shirt - White",
+      "price": 32.99,
+      "image": "https://i.pinimg.com/1200x/24/01/85/2401859c3f6d11708789e2393ee713f8.jpg",
+      "category": "men's clothing",
+      "description": "Classic white casual shirt",
+      "rating": 4.3
+    },
+    {
+      "id": 3,
+      "name": "Men's Casual Shirt - Striped",
+      "price": 34.99,
+      "image": "https://i.pinimg.com/1200x/3f/cf/0b/3fcf0b6b0a11cee97abcd972bfb75888.jpg",
+      "category": "men's clothing",
+      "description": "Stylish striped casual shirt",
+      "rating": 4.7
+    },
+    {
+      "id": 4,
+      "name": "Men's Casual Shirt - Checkered",
+      "price": 36.99,
+      "image": "https://i.pinimg.com/1200x/3b/da/a2/3bdaa20e061799f021981d667e8f44c4.jpg",
+      "category": "men's clothing",
+      "description": "Trendy checkered pattern shirt",
+      "rating": 4.4
+    },
+    {
+      "id": 5,
+      "name": "Men's Denim Jeans - Classic",
+      "price": 49.99,
+      "image": "https://i.pinimg.com/736x/a3/41/56/a34156b32e3d7af6b1a17f3f75c09b15.jpg",
+      "category": "men's clothing",
+      "description": "Comfortable classic denim jeans",
+      "rating": 4.6
+    },
+    {
+      "id": 6,
+      "name": "Men's Denim Jeans - Slim Fit",
+      "price": 54.99,
+      "image": "https://i.pinimg.com/1200x/97/62/7e/97627e6e6ab2ddb89018aff3c56015ca.jpg",
+      "category": "men's clothing",
+      "description": "Slim fit denim jeans for modern look",
+      "rating": 4.5
+    },
+    {
+      "id": 7,
+      "name": "Men's Denim Jeans - Dark Wash",
+      "price": 59.99,
+      "image": "https://i.pinimg.com/1200x/08/a5/c1/08a5c16b2b3497f5ad148430ac51d422.jpg",
+      "category": "men's clothing",
+      "description": "Premium dark wash denim jeans",
+      "rating": 4.8
+    },
+    {
+      "id": 8,
+      "name": "Women's Casual Blouse - Floral",
+      "price": 27.99,
+      "image": "https://i.pinimg.com/1200x/ea/bc/e0/eabce058ed8bf038fd13465ee88652aa.jpg",
+      "category": "women's clothing",
+      "description": "Beautiful floral pattern blouse",
+      "rating": 4.4
+    },
+    {
+      "id": 9,
+      "name": "Women's Casual Blouse - Pink",
+      "price": 29.99,
+      "image": "https://i.pinimg.com/736x/3f/34/3c/3f343c6f2a4ddd66ebeed9c7dbd0c00b.jpg",
+      "category": "women's clothing",
+      "description": "Soft pink casual blouse",
+      "rating": 4.6
+    },
+    {
+      "id": 10,
+      "name": "Women's Casual Blouse - White",
+      "price": 31.99,
+      "image": "https://i.pinimg.com/1200x/a9/36/ab/a936abc4fbd70fdc56a471744b492947.jpg",
+      "category": "women's clothing",
+      "description": "Elegant white casual blouse",
+      "rating": 4.5
+    },
+    {
+      "id": 11,
+      "name": "Women's Denim Jeans - Skinny",
+      "price": 45.99,
+      "image": "https://i.pinimg.com/736x/26/50/33/265033f6721210c0dd5b7365d6154440.jpg",
+      "category": "women's clothing",
+      "description": "Comfortable skinny fit jeans",
+      "rating": 4.3
+    },
+    {
+      "id": 12,
+      "name": "Women's Denim Jeans - Boyfriend",
+      "price": 47.99,
+      "image": "https://i.pinimg.com/736x/ea/2a/e5/ea2ae54d1cc25393fc93696de6d5e022.jpg",
+      "category": "women's clothing",
+      "description": "Relaxed boyfriend fit jeans",
+      "rating": 4.7
+    },
+    {
+      "id": 13,
+      "name": "Women's Midi Skirt - Flowy",
+      "price": 39.99,
+      "image": "https://i.pinimg.com/736x/f8/7f/c1/f87fc17e6e025b04bacde0148777f8c6.jpg",
+      "category": "women's clothing",
+      "description": "Elegant flowy midi skirt",
+      "rating": 4.8
+    },
+    {
+      "id": 14,
+      "name": "Women's Midi Skirt - Pleated",
+      "price": 42.99,
+      "image": "https://i.pinimg.com/1200x/f4/f6/f1/f4f6f1fd673b82dac061cf213cfc6737.jpg",
+      "category": "women's clothing",
+      "description": "Chic pleated midi skirt",
+      "rating": 4.6
+    },
+    {
+      "id": 15,
+      "name": "Women's Summer Dress - Floral",
+      "price": 55.99,
+      "image": "https://i.pinimg.com/1200x/83/70/49/837049d78b5b526476d9389448095bac.jpg",
+      "category": "women's clothing",
+      "description": "Beautiful floral summer dress",
+      "rating": 4.9
+    },
+    {
+      "id": 16,
+      "name": "Women's Summer Dress - Maxi",
+      "price": 59.99,
+      "image": "https://i.pinimg.com/1200x/c4/1f/e4/c41fe4c718b7728b8e01615508e50a23.jpg",
+      "category": "women's clothing",
+      "description": "Elegant maxi summer dress",
+      "rating": 4.7
+    },
+    {
+      "id": 17,
+      "name": "Women's Casual Top - Striped",
+      "price": 25.99,
+      "image": "https://i.pinimg.com/736x/4b/37/17/4b37170594de996e202c61467d4be17d.jpg",
+      "category": "women's clothing",
+      "description": "Comfortable striped casual top",
+      "rating": 4.4
+    },
+    {
+      "id": 18,
+      "name": "Men's Formal Shirt - White",
+      "price": 44.99,
+      "image": "https://i.pinimg.com/1200x/76/25/b2/7625b2a3c06e3e999542317b1e654117.jpg",
+      "category": "men's clothing",
+      "description": "Classic white formal shirt",
+      "rating": 4.5
+    },
+    {
+      "id": 19,
+      "name": "Men's Casual Shirt - Black",
+      "price": 33.99,
+      "image": "https://i.pinimg.com/1200x/16/7b/e1/167be13eab5c2e40c4facc1c8e2b17cd.jpg",
+      "category": "men's clothing",
+      "description": "Sleek black casual shirt",
+      "rating": 4.6
+    },
+    {
+      "id": 20,
+      "name": "Men's Casual Shirt - Gray",
+      "price": 31.99,
+      "image": "https://i.pinimg.com/736x/3a/cd/60/3acd609002bb044b557a37c88004ef1b.jpg",
+      "category": "men's clothing",
+      "description": "Modern gray casual shirt",
+      "rating": 4.3
+    }
+  ]
+}
