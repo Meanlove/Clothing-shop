@@ -15,6 +15,7 @@ import {
   FaArrowRight,
 } from "react-icons/fa";
 import { useCart } from "../context/CartContext";
+import Swal from "sweetalert2";
 
 const Cart = () => {
   const navigate = useNavigate();
@@ -31,23 +32,26 @@ const Cart = () => {
 
   const heroSlides = [
     {
-      image: "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+      image:
+        "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
       title: "Your Shopping Cart",
       subtitle: "Review your selected items and complete your order",
-      buttonText: "Continue Shopping"
+      buttonText: "Continue Shopping",
     },
     {
-      image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+      image:
+        "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
       title: "Secure Checkout",
       subtitle: "Safe and encrypted payment processing",
-      buttonText: "Shop More"
+      buttonText: "Shop More",
     },
     {
-      image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+      image:
+        "https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
       title: "Fast Delivery",
       subtitle: "Free shipping on all orders",
-      buttonText: "Browse Collections"
-    }
+      buttonText: "Browse Collections",
+    },
   ];
 
   useEffect(() => {
@@ -75,9 +79,27 @@ const Cart = () => {
 
   const proceedToCheckout = () => {
     const checkoutSuccessful = true;
+
     if (checkoutSuccessful) {
       clearCart();
-      alert("Checkout successful! Thank you for your purchase.");
+
+      // ✅ REPLACE ALERT WITH SWEETALERT2
+      Swal.fire({
+        title: "Checkout Successful!",
+        text: "Thank you for your purchase!",
+        icon: "success",
+        confirmButtonText: "Continue Shopping",
+        confirmButtonColor: "#3B82F6",
+        draggable: true,
+        customClass: {
+          popup: "rounded-2xl",
+          confirmButton: "px-6 py-3 rounded-xl font-semibold",
+        },
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/all-collections");
+        }
+      });
     }
   };
 
@@ -127,7 +149,7 @@ const Cart = () => {
               <p className="text-xl md:text-2xl text-gray-200 mb-8 max-w-2xl mx-auto leading-relaxed">
                 Your fashion journey starts here
               </p>
-              
+
               <div className="flex gap-4 justify-center items-center">
                 <button
                   onClick={continueShopping}
@@ -184,7 +206,9 @@ const Cart = () => {
                   className="bg-gradient-to-br from-blue-500 to-blue-600 text-white rounded-2xl p-6 text-center hover:from-blue-600 hover:to-blue-700 transition-all duration-300 hover:shadow-lg"
                 >
                   <h4 className="text-xl font-bold mb-2">Men's Collection</h4>
-                  <p className="text-blue-100">Discover trendy fashion for men</p>
+                  <p className="text-blue-100">
+                    Discover trendy fashion for men
+                  </p>
                 </Link>
                 <Link
                   to="/women"
@@ -382,7 +406,9 @@ const Cart = () => {
                     <h4 className="font-semibold text-gray-800 mb-1">
                       Easy Returns
                     </h4>
-                    <p className="text-sm text-gray-600">30-day return policy</p>
+                    <p className="text-sm text-gray-600">
+                      30-day return policy
+                    </p>
                   </div>
                 </div>
               </div>
@@ -429,7 +455,8 @@ const Cart = () => {
                     <span>Secure and encrypted checkout</span>
                   </div>
                   <p className="text-xs text-gray-400">
-                    By completing your purchase you agree to our Terms of Service
+                    By completing your purchase you agree to our Terms of
+                    Service
                   </p>
                 </div>
 

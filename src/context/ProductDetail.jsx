@@ -12,17 +12,20 @@ import {
   FaMinus,
 } from "react-icons/fa";
 import { useCart } from "../context/CartContext";
-import AllCollections from "../Components/AllCollections";
+import { useWishlist } from "../context/WishlistContext"; // ✅ ADD THIS IMPORT
 
 const ProductDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { addToCart } = useCart();
+  const { toggleWishlist, isInWishlist } = useWishlist(); // ✅ ADD THIS LINE
   const [product, setProduct] = useState(null);
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
-  const [wishlist, setWishlist] = useState(new Set());
+
+  // ✅ REMOVE OLD WISHLIST STATE
+  // const [wishlist, setWishlist] = useState(new Set());
 
   useEffect(() => {
     // Fetch from local JSON
@@ -65,24 +68,28 @@ const ProductDetail = () => {
     }
   }, [product]);
 
-  const toggleWishlist = () => {
-    const newWishlist = new Set(wishlist);
-    if (newWishlist.has(product.id)) {
-      newWishlist.delete(product.id);
-    } else {
-      newWishlist.add(product.id);
-    }
-    setWishlist(newWishlist);
-  };
+  // ✅ REMOVE OLD TOGGLE WISHLIST FUNCTION
+  // const toggleWishlist = () => {
+  //   const newWishlist = new Set(wishlist);
+  //   if (newWishlist.has(product.id)) {
+  //     newWishlist.delete(product.id);
+  //   } else {
+  //     newWishlist.add(product.id);
+  //   }
+  //   setWishlist(newWishlist);
+  // };
 
   const handleAddToCart = () => {
-    addToCart({
-      id: product.id,
-      name: product.title,
-      price: product.price,
-      image: product.image,
-      category: product.category,
-    });
+    // ✅ ADD QUANTITY TO CART
+    for (let i = 0; i < quantity; i++) {
+      addToCart({
+        id: product.id,
+        name: product.title,
+        price: product.price,
+        image: product.image,
+        category: product.category,
+      });
+    }
   };
 
   const increaseQuantity = () => {
@@ -214,7 +221,7 @@ const ProductDetail = () => {
                 <div className="flex items-center gap-3">
                   <button
                     onClick={decreaseQuantity}
-                    className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center hover:bg-gray-200 transition-colors duration-300"
+                    className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center hover:bg-gray-200 transition-colors duration-300 hover:scale-105 active:scale-95"
                   >
                     <FaMinus className="text-sm" />
                   </button>
@@ -223,7 +230,7 @@ const ProductDetail = () => {
                   </span>
                   <button
                     onClick={increaseQuantity}
-                    className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center hover:bg-gray-200 transition-colors duration-300"
+                    className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center hover:bg-gray-200 transition-colors duration-300 hover:scale-105 active:scale-95"
                   >
                     <FaPlus className="text-sm" />
                   </button>
@@ -234,21 +241,21 @@ const ProductDetail = () => {
               <div className="flex flex-col sm:flex-row gap-4 mb-8">
                 <button
                   onClick={handleAddToCart}
-                  className="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 text-white py-4 rounded-xl font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 hover:shadow-lg flex items-center justify-center gap-2"
+                  className="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 text-white py-4 rounded-xl font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 hover:shadow-lg hover:scale-105 active:scale-95 flex items-center justify-center gap-2"
                 >
                   <FaShoppingCart />
                   Add to Cart - ${(product.price * quantity).toFixed(2)}
                 </button>
                 <button
-                  onClick={toggleWishlist}
-                  className={`px-6 py-4 rounded-xl font-semibold transition-all duration-300 flex items-center justify-center gap-2 ${
-                    wishlist.has(product.id)
+                  onClick={() => toggleWishlist(product)} // ✅ CHANGE TO THIS
+                  className={`px-6 py-4 rounded-xl font-semibold transition-all duration-300 flex items-center justify-center gap-2 hover:scale-105 active:scale-95 ${
+                    isInWishlist(product.id) // ✅ CHANGE TO THIS
                       ? "bg-red-500 text-white hover:bg-red-600"
                       : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                   }`}
                 >
                   <FaHeart />
-                  {wishlist.has(product.id) ? "In Wishlist" : "Wishlist"}
+                  {isInWishlist(product.id) ? "In Wishlist" : "Wishlist"} {/* ✅ CHANGE TO THIS */}
                 </button>
               </div>
 
@@ -272,7 +279,7 @@ const ProductDetail = () => {
             {/* Back Button */}
             <button
               onClick={() => navigate(-1)}
-              className="flex items-center gap-2 text-gray-600 hover:text-blue-600 transition-colors duration-300"
+              className="flex items-center gap-2 text-gray-600 hover:text-blue-600 transition-colors duration-300 hover:scale-105"
             >
               <FaArrowLeft />
               <span>Back to Products</span>
