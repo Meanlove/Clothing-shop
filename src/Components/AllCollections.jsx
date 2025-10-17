@@ -26,18 +26,6 @@ const AllCollections = () => {
   const { toggleWishlist, isInWishlist } = useWishlist(); // ✅ ADD THIS LINE
   const location = useLocation();
 
-  // ✅ REMOVE THIS OLD WISHLIST CODE (លុប 9 ខ្សែនេះចេញ):
-  // const [wishlist, setWishlist] = useState(new Set());
-  // const toggleWishlist = (id) => {
-  //   const newWishlist = new Set(wishlist);
-  //   if (newWishlist.has(id)) {
-  //     newWishlist.delete(id);
-  //   } else {
-  //     newWishlist.add(id);
-  //   }
-  //   setWishlist(newWishlist);
-  // };
-
   const heroSlides = [
     {
       image:
@@ -226,17 +214,6 @@ const AllCollections = () => {
       category: product.category,
     });
   };
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 flex items-center justify-center pt-20">
-        <div className="text-center">
-          <div className="w-16 h-16 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-gray-600 text-lg">Loading all collections...</p>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">

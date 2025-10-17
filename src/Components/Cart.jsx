@@ -78,29 +78,111 @@ const Cart = () => {
   };
 
   const proceedToCheckout = () => {
-    const checkoutSuccessful = true;
+    // ✅ REPLACE WITH CONFIRMATION DIALOG
+    Swal.fire({
+      title: "Confirm Your Order?",
+      html: `
+        <div class="text-left">
+          <p class="mb-2"><strong>Items:</strong> ${getCartItemsCount()}</p>
+          <p class="mb-2"><strong>Subtotal:</strong> $${getSubtotal().toFixed(
+            2
+          )}</p>
+          <p class="mb-2"><strong>Shipping:</strong> FREE</p>
+          <p class="mb-4"><strong>Total:</strong> $${getTotal().toFixed(2)}</p>
+          <p class="text-sm text-gray-600">Please review your order before proceeding.</p>
+        </div>
+      `,
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonText: "Yes, Proceed to Pay",
+      cancelButtonText: "Review Order",
+      confirmButtonColor: "#10B981",
+      cancelButtonColor: "red",
+      reverseButtons: true,
+      draggable: true,
+      customClass: {
+        popup: "rounded-2xl",
+        confirmButton: "px-6 py-3 rounded-xl font-semibold",
+        cancelButton: "px-6 py-3 rounded-xl font-semibold",
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Process payment
+        processPayment();
+      }
+    });
+  };
 
-    if (checkoutSuccessful) {
-      clearCart();
+  const processPayment = () => {
+    // Simulate payment processing
+    Swal.fire({
+      title: "Processing Payment...",
+      text: "Please wait while we process your payment",
+      icon: "info",
+      showConfirmButton: false,
+      allowOutsideClick: false,
+      draggable: false,
+      didOpen: () => {
+        Swal.showLoading();
+      },
+    });
 
-      // ✅ REPLACE ALERT WITH SWEETALERT2
-      Swal.fire({
-        title: "Checkout Successful!",
-        text: "Thank you for your purchase!",
-        icon: "success",
-        confirmButtonText: "Continue Shopping",
-        confirmButtonColor: "#3B82F6",
-        draggable: true,
-        customClass: {
-          popup: "rounded-2xl",
-          confirmButton: "px-6 py-3 rounded-xl font-semibold",
-        },
-      }).then((result) => {
-        if (result.isConfirmed) {
-          navigate("/all-collections");
-        }
-      });
-    }
+    // Simulate API call
+    setTimeout(() => {
+      const paymentSuccessful = Math.random() > 0.2; // 80% success rate
+
+      if (paymentSuccessful) {
+        // Payment successful
+        Swal.fire({
+          title: "Payment Successful! 🎉",
+          html: `
+            <div class="text-center">
+              <p class="mb-4">Thank you for your purchase!</p>
+              <div class="bg-green-50 rounded-lg p-4 mb-4">
+                <p><strong>Order Total:</strong> $${getTotal().toFixed(2)}</p>
+                <p><strong>Items:</strong> ${getCartItemsCount()}</p>
+                <p class="text-sm text-green-600 mt-2">Your order will be shipped within 2-3 business days</p>
+              </div>
+            </div>
+          `,
+          icon: "success",
+          confirmButtonText: "Continue Shopping",
+          confirmButtonColor: "#3B82F6",
+          draggable: true,
+          customClass: {
+            popup: "rounded-2xl",
+            confirmButton: "px-6 py-3 rounded-xl font-semibold",
+          },
+        }).then((result) => {
+          if (result.isConfirmed) {
+            clearCart();
+            navigate("/all-collections");
+          }
+        });
+      } else {
+        // Payment failed
+        Swal.fire({
+          title: "Payment Failed",
+          text: "There was an issue processing your payment. Please try again.",
+          icon: "error",
+          confirmButtonText: "Try Again",
+          cancelButtonText: "Cancel",
+          showCancelButton: true,
+          confirmButtonColor: "#EF4444",
+          cancelButtonColor: "#6B7280",
+          draggable: true,
+          customClass: {
+            popup: "rounded-2xl",
+            confirmButton: "px-6 py-3 rounded-xl font-semibold",
+            cancelButton: "px-6 py-3 rounded-xl font-semibold",
+          },
+        }).then((result) => {
+          if (result.isConfirmed) {
+            proceedToCheckout(); // Retry payment
+          }
+        });
+      }
+    }, 2000);
   };
 
   if (cartItems.length === 0) {
