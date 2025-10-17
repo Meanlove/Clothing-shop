@@ -65,7 +65,7 @@ const Navbar = () => {
           <div className="hidden lg:flex items-center space-x-1">
             <NavLink
               className={({ isActive }) =>
-                `flex items-center gap-3 group transition-all duration-300 px-4 py-2 rounded-xl transition-all duration-300 font-medium relative group
+                `flex items-center gap-3 group transition-all duration-300 px-4 py-2 rounded-xl  font-medium relative group
                   ${
                     isActive
                       ? "text-amber-600 font-semibold bg-amber-50 border border-amber-200"
