@@ -1,8 +1,11 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash, FaGoogle, FaFacebook, FaEnvelope, FaLock, FaUser, FaCheck, FaTimes } from "react-icons/fa";
+import Swal from 'sweetalert2';
+
 
 const Register = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -64,12 +67,38 @@ const Register = () => {
     e.preventDefault();
     
     if (formData.password !== formData.confirmPassword) {
-      alert("Passwords don't match!");
+      Swal.fire({
+        title: 'Password Mismatch',
+        text: "Passwords don't match!",
+        icon: 'error',
+        confirmButtonText: 'Try Again',
+        confirmButtonColor: '#EC4899',
+        background: '#fff',
+        color: '#374151',
+        customClass: {
+          popup: 'rounded-2xl shadow-2xl',
+          title: 'text-xl font-bold text-gray-900',
+          confirmButton: 'px-6 py-3 rounded-xl font-semibold'
+        }
+      });
       return;
     }
 
     if (!formData.agreeToTerms) {
-      alert("Please agree to the terms and conditions");
+      Swal.fire({
+        title: 'Terms Required',
+        text: "Please agree to the terms and conditions",
+        icon: 'warning',
+        confirmButtonText: 'I Understand',
+        confirmButtonColor: '#EC4899',
+        background: '#fff',
+        color: '#374151',
+        customClass: {
+          popup: 'rounded-2xl shadow-2xl',
+          title: 'text-xl font-bold text-gray-900',
+          confirmButton: 'px-6 py-3 rounded-xl font-semibold'
+        }
+      });
       return;
     }
 
@@ -77,13 +106,51 @@ const Register = () => {
     
     // Simulate API call
     setTimeout(() => {
-      alert(`Account created successfully for ${formData.firstName}!`);
+      Swal.fire({
+        title: 'Welcome to Our Community!',
+        html: `
+          <div class="text-center">
+            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+            </div>
+            <p class="text-gray-700 mb-2">Account created successfully for <strong>${formData.firstName}</strong>!</p>
+            <p class="text-sm text-gray-600">Welcome to our fashion family!</p>
+          </div>
+        `,
+        icon: 'success',
+        confirmButtonText: 'Start Shopping',
+        confirmButtonColor: '#8B5CF6',
+        background: '#fff',
+        color: '#374151',
+        customClass: {
+          popup: 'rounded-2xl shadow-2xl',
+          title: 'text-2xl font-bold text-gray-900',
+          confirmButton: 'px-6 py-3 rounded-xl font-semibold'
+        },
+        preConfirm: () => {
+          // Navigate to shop page when button is clicked
+          navigate('/');
+        }
+      });
       setIsLoading(false);
     }, 2000);
   };
 
   const handleSocialRegister = (provider) => {
-    alert(`Registering with ${provider}...`);
+    Swal.fire({
+      title: 'Social Registration',
+      text: `Registering with ${provider}...`,
+      icon: 'info',
+      showConfirmButton: false,
+      timer: 1500,
+      background: '#fff',
+      color: '#374151',
+      customClass: {
+        popup: 'rounded-2xl shadow-2xl'
+      }
+    })
   };
 
   const passwordRequirements = [
@@ -100,12 +167,12 @@ const Register = () => {
         {/* Left Side - Branding & Benefits */}
         <div className="text-center lg:text-left space-y-6">
           <Link to="/" className="inline-flex items-center gap-3 text-2xl font-bold text-gray-900">
-          <img
-                className="w-15 h-15 rounded-full border-2 border-gray-300 object-cover group-hover:border-amber-500 transition-colors duration-300"
-                src="https://i.pinimg.com/1200x/7a/bf/2c/7abf2ca43b62487de9aa4cfc62686e84.jpg"
-                alt="Fashion Store Logo"
-              />
-              CLOTHING SHOP
+            <img
+              className="w-15 h-15 rounded-full border-2 border-gray-300 object-cover group-hover:border-amber-500 transition-colors duration-300"
+              src="https://i.pinimg.com/1200x/7a/bf/2c/7abf2ca43b62487de9aa4cfc62686e84.jpg"
+              alt="Fashion Store Logo"
+            />
+            CLOTHING SHOP
           </Link>
           
           <h1 className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">

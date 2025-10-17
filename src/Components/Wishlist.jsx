@@ -53,7 +53,7 @@ const Wishlist = () => {
               <FaHeart className="text-3xl text-pink-400" />
             </div>
             <h2 className="text-2xl font-bold text-gray-800 mb-4">
-              Your wishlist is empty
+              Aww ..Snap. Your wish list is empty!
             </h2>
             <p className="text-gray-600 mb-8">
               Start adding your favorite items to your wishlist!

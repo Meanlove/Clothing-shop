@@ -179,13 +179,13 @@ const About = () => {
               to="/men"
               className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-8 py-4 rounded-2xl font-semibold hover:from-purple-700 hover:to-blue-700 transition-all duration-300 hover:shadow-xl hover:scale-105"
             >
-              Shop Men's Collection
+              Men's Collection
             </Link>
             <Link
               to="/women"
               className="border-2 border-purple-600 text-purple-600 px-8 py-4 rounded-2xl font-semibold hover:bg-purple-600 hover:text-white transition-all duration-300 hover:shadow-xl"
             >
-              Shop Women's Collection
+              Women's Collection
             </Link>
             <Link
               to="/contact"

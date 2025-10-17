@@ -16,7 +16,10 @@ const Navbar = () => {
   useEffect(() => {
     if (location.pathname === "/all-collections" && searchTerm.trim()) {
       const timer = setTimeout(() => {
-        navigate(`/all-collections?search=${encodeURIComponent(searchTerm.trim())}`, { replace: true });
+        navigate(
+          `/all-collections?search=${encodeURIComponent(searchTerm.trim())}`,
+          { replace: true }
+        );
       }, 500);
 
       return () => clearTimeout(timer);
@@ -26,7 +29,9 @@ const Navbar = () => {
   const handleSearchSubmit = (e) => {
     e.preventDefault();
     if (searchTerm.trim()) {
-      navigate(`/all-collections?search=${encodeURIComponent(searchTerm.trim())}`);
+      navigate(
+        `/all-collections?search=${encodeURIComponent(searchTerm.trim())}`
+      );
       setSearchTerm("");
       setIsSearchOpen(false);
     }
@@ -62,10 +67,10 @@ const Navbar = () => {
             </span>
           </NavLink>
 
-          <div className="hidden lg:flex items-center space-x-1">
+          {/* <div className="hidden lg:flex items-center space-x-1">
             <NavLink
               className={({ isActive }) =>
-                `flex items-center gap-3 group transition-all duration-300 px-4 py-2 rounded-xl  font-medium relative group
+                `transition-all duration-300 px-4 py-2 rounded-xl  font-medium relative group
                   ${
                     isActive
                       ? "text-amber-600 font-semibold bg-amber-50 border border-amber-200"
@@ -76,23 +81,37 @@ const Navbar = () => {
             >
               Home
             </NavLink>
-          </div>
+          </div> */}
           {/* Navigation Links */}
           <div className="hidden lg:flex items-center space-x-1">
-            {["men", "women", "all-collections"].map((item) => (
+            {[
+              { path: "/", label: "Home" },
+              { path: "/men", label: "Men" },
+              { path: "/women", label: "Women" },
+              { path: "/all-collections", label: "All Collections" },
+            ].map((item) => (
               <NavLink
-                key={item}
-                to={`/${item}`}
+                key={item.path}
+                to={item.path}
                 className={({ isActive }) =>
-                  `px-4 py-2 rounded-xl transition-all duration-300 font-medium relative group
-                  ${
-                    isActive
-                      ? "text-amber-600 font-semibold bg-amber-50 border border-amber-200"
-                      : "text-gray-600 hover:text-amber-700"
-                  }`
+                  `px-4 py-2 rounded-xl transition-all duration-300 font-medium relative overflow-hidden group
+        ${
+          isActive
+            ? "text-amber-600 font-semibold bg-gradient-to-r from-amber-50 to-yellow-50 border border-amber-200 shadow-sm"
+            : "text-gray-600 hover:text-amber-700"
+        }`
                 }
               >
-                {item.charAt(0).toUpperCase() + item.slice(1).replace("-", " ")}
+                {/* Hover background effect */}
+                <span className="relative z-10">{item.label}</span>
+                <span className="absolute inset-0 bg-gradient-to-r from-amber-50 to-yellow-50 translate-y-full group-hover:translate-y-0 transition-transform duration-300 rounded-xl"></span>
+
+                {/* Active state indicator */}
+                {({ isActive }) =>
+                  isActive && (
+                    <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1.5 h-1.5 bg-amber-500 rounded-full"></span>
+                  )
+                }
               </NavLink>
             ))}
           </div>
@@ -202,7 +221,7 @@ const Navbar = () => {
               className="p-2 rounded-xl text-gray-600 hover:text-amber-600 hover:bg-amber-50 transition-all duration-300 relative flex items-center hover:scale-105 active:scale-95"
             >
               <FaHeart className="w-5 h-5" />
-              
+
               {/* Wishlist Count Badge */}
               {getWishlistItemsCount() > 0 && (
                 <span className="absolute -top-1 -right-1 bg-red-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-semibold">
@@ -271,21 +290,47 @@ const Navbar = () => {
             <NavLink
               to="/login"
               className={({ isActive }) =>
-                `px-4 py-2 rounded-xl transition-all duration-300 font-medium
-                ${
-                  isActive
-                    ? "text-amber-600 font-semibold"
-                    : "text-gray-600 hover:text-amber-700 hover:bg-amber-50"
-                }`
+                `px-6 py-2 rounded-xl font-medium transition-all duration-300 relative overflow-hidden group shadow-lg
+      ${
+        isActive
+          ? "bg-gradient-to-r from-amber-500 to-amber-600 text-white shadow-xl scale-105"
+          : "bg-gradient-to-r from-amber-400 to-amber-500 text-white hover:from-amber-500 hover:to-amber-600 hover:shadow-xl hover:scale-105 active:scale-95"
+      }`
               }
             >
-              Login
+              {/* Shine effect */}
+              <span className="relative z-10">Login</span>
+              <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></span>
+
+              {/* Active state indicator */}
+              {({ isActive }) =>
+                isActive && (
+                  <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-3 h-3 bg-white rounded-full animate-pulse"></span>
+                )
+              }
             </NavLink>
+
             <NavLink
               to="/register"
-              className="px-6 py-2 bg-gradient-to-r from-amber-500 to-amber-600 text-white rounded-xl font-medium hover:from-amber-600 hover:to-amber-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 active:scale-95"
+              className={({ isActive }) =>
+                `px-6 py-2 rounded-xl font-medium transition-all duration-300 relative overflow-hidden group shadow-lg
+      ${
+        isActive
+          ? "bg-gradient-to-r from-amber-500 to-amber-600 text-white shadow-xl scale-105"
+          : "bg-gradient-to-r from-amber-400 to-amber-500 text-white hover:from-amber-500 hover:to-amber-600 hover:shadow-xl hover:scale-105 active:scale-95"
+      }`
+              }
             >
-              Register
+              {/* Shine effect */}
+              <span className="relative z-10">Register</span>
+              <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></span>
+
+              {/* Active state indicator */}
+              {({ isActive }) =>
+                isActive && (
+                  <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-3 h-3 bg-white rounded-full animate-pulse"></span>
+                )
+              }
             </NavLink>
           </div>
 

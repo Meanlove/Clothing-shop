@@ -96,7 +96,7 @@ const Cart = () => {
       showCancelButton: true,
       confirmButtonText: "Yes, Proceed to Pay",
       cancelButtonText: "Review Order",
-      confirmButtonColor: "#10B981",
+      confirmButtonColor: "green",
       cancelButtonColor: "red",
       reverseButtons: true,
       draggable: true,

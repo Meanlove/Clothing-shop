@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash, FaGoogle, FaFacebook, FaEnvelope, FaLock, FaUser } from "react-icons/fa";
+import Swal from 'sweetalert2';
 
 const Login = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({ 
     email: "", 
     password: "" 
@@ -21,13 +23,41 @@ const Login = () => {
     
     // Simulate API call
     setTimeout(() => {
-      alert(`Welcome back, ${formData.email}!`);
+      Swal.fire({
+        title: 'Welcome back!',
+        text: `Welcome back, ${formData.email}!`,
+        icon: 'success',
+        confirmButtonText: 'Start Shopping',
+        confirmButtonColor: '#8B5CF6',
+        background: '#fff',
+        color: '#374151',
+        customClass: {
+          popup: 'rounded-2xl shadow-2xl',
+          title: 'text-2xl font-bold text-gray-900',
+          confirmButton: 'px-6 py-3 rounded-xl font-semibold'
+        },
+        preConfirm: () => {
+          // Navigate to shop page when button is clicked
+          navigate('/');
+        }
+      });
       setIsLoading(false);
     }, 1500);
   };
 
   const handleSocialLogin = (provider) => {
-    alert(`Logging in with ${provider}...`);
+    Swal.fire({
+      title: 'Social Login',
+      text: `Logging in with ${provider}...`,
+      icon: 'info',
+      showConfirmButton: false,
+      timer: 1500,
+      background: '#fff',
+      color: '#374151',
+      customClass: {
+        popup: 'rounded-2xl shadow-2xl'
+      }
+    })
   };
 
   return (
