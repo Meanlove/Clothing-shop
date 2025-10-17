@@ -2,6 +2,240 @@
   "products": [
     {
       "id": 1,
+      "name": "Urban Street Style Hoodie",
+      "price": 45.99,
+      "image": "https://i.pinimg.com/736x/cb/1b/07/cb1b072dc92f395c9ba1931e69e657d6.jpg",
+      "category": "men's clothing",
+      "description": "Trendy urban hoodie for street fashion",
+      "rating": 4.6
+    },
+    {
+      "id": 2,
+      "name": "Designer Floral Print Blouse",
+      "price": 38.99,
+      "image": "https://i.pinimg.com/736x/10/8a/69/108a69ab4a83884a3e67de580b213232.jpg",
+      "category": "men's clothing",
+      "description": "Elegant blouse with beautiful floral design",
+      "rating": 4.7
+    },
+    {
+      "id": 3,
+      "name": "Classic Denim Jacket",
+      "price": 65.99,
+      "image": "https://i.pinimg.com/1200x/bb/2a/89/bb2a899f9314d2af8c4c14a8379b38c0.jpg",
+      "category": "men's clothing",
+      "description": "Timeless denim jacket for casual wear",
+      "rating": 4.8
+    },
+    {
+      "id": 4,
+      "name": "Elegant Evening Gown",
+      "price": 89.99,
+      "image": "https://i.pinimg.com/1200x/8a/10/91/8a1091d03c7530b08d737408b5bde2a4.jpg",
+      "category": "men's clothing",
+      "description": "Stunning evening gown for special occasions",
+      "rating": 4.9
+    },
+    {
+      "id": 5,
+      "name": "Casual Summer Dress",
+      "price": 42.99,
+      "image": "https://i.pinimg.com/1200x/ee/13/40/ee134006d0f6dfd1a7c4420d0d39fd38.jpg",
+      "category": "men's clothing",
+      "description": "Light and comfortable summer dress",
+      "rating": 4.4
+    },
+    {
+      "id": 6,
+      "name": "Business Formal Suit",
+      "price": 129.99,
+      "image": "https://i.pinimg.com/1200x/b1/2d/dd/b12ddd7f5e47d9f735680624c352b0e5.jpg",
+      "category": "men's clothing",
+      "description": "Professional business suit for formal events",
+      "rating": 4.7
+    },
+    {
+      "id": 7,
+      "name": "Designer Cocktail Dress",
+      "price": 75.99,
+      "image": "https://i.pinimg.com/1200x/46/6f/eb/466feb980c142ab7cecc289f196f5979.jpg",
+      "category": "men's clothing",
+      "description": "Chic cocktail dress for parties",
+      "rating": 4.6
+    },
+    {
+      "id": 8,
+      "name": "Vintage Leather Jacket",
+      "price": 95.99,
+      "image": "https://i.pinimg.com/736x/8f/88/3b/8f883b01c93bed6c591382937b85701e.jpg",
+      "category": "men's clothing",
+      "description": "Classic vintage style leather jacket",
+      "rating": 4.8
+    },
+    {
+      "id": 9,
+      "name": "Bohemian Summer Top",
+      "price": 28.99,
+      "image": "https://i.pinimg.com/736x/04/09/69/040969282964350d24133656c082bf4f.jpg",
+      "category": "men's clothing",
+      "description": "Bohemian style top for summer fashion",
+      "rating": 4.3
+    },
+    {
+      "id": 10,
+      "name": "Designer Winter Coat",
+      "price": 112.99,
+      "image": "https://i.pinimg.com/1200x/a2/b1/80/a2b18045f3c0f12ac1153bb410035d09.jpg",
+      "category": "men's clothing",
+      "description": "Warm and stylish winter coat",
+      "rating": 4.7
+    },
+    {
+      "id": 11,
+      "name": "Casual Linen Shirt",
+      "price": 35.99,
+      "image": "https://i.pinimg.com/1200x/43/19/35/43193563a521ab739cbb79e96a067562.jpg",
+      "category": "men's clothing",
+      "description": "Comfortable linen shirt for warm weather",
+      "rating": 4.5
+    },
+    {
+      "id": 12,
+      "name": "Elegant Silk Blouse",
+      "price": 52.99,
+      "image": "https://i.pinimg.com/736x/29/47/18/2947185484ba1e2337a276190f9b6b38.jpg",
+      "category": "men's clothing",
+      "description": "Luxurious silk blouse for formal occasions",
+      "rating": 4.8
+    },
+    {
+      "id": 13,
+      "name": "Athletic Sportswear Set",
+      "price": 68.99,
+      "image": "https://i.pinimg.com/736x/32/63/86/32638624c6811a8f955353832ce200b0.jpg",
+      "category": "women's clothing",
+      "description": "Complete athletic wear for sports activities",
+      "rating": 4.4
+    },
+    {
+      "id": 14,
+      "name": "Designer Party Dress",
+      "price": 82.99,
+      "image": "https://i.pinimg.com/1200x/e9/0c/e4/e90ce4c416caae483d02e807593a561e.jpg",
+      "category": "women's clothing",
+      "description": "Elegant party dress for celebrations",
+      "rating": 4.6
+    },
+    {
+      "id": 15,
+      "name": "Classic Wool Sweater",
+      "price": 48.99,
+      "image": "https://i.pinimg.com/1200x/42/3c/cf/423ccf61cee13e2060dd58d024a30a7f.jpg",
+      "category": "women's clothing",
+      "description": "Warm wool sweater for winter season",
+      "rating": 4.5
+    },
+    {
+      "id": 16,
+      "name": "Casual Denim Overalls",
+      "price": 55.99,
+      "image": "https://i.pinimg.com/736x/e5/bc/6b/e5bc6b3a99053ac9d20a88b139f83131.jpg",
+      "category": "women's clothing",
+      "description": "Trendy denim overalls for casual style",
+      "rating": 4.3
+    },
+    {
+      "id": 17,
+      "name": "Formal Business Attire",
+      "price": 145.99,
+      "image": "https://i.pinimg.com/736x/b8/3f/08/b83f0833956a171c1793d0e7327a642a.jpg",
+      "category": "women's clothing",
+      "description": "Complete formal business outfit",
+      "rating": 4.7
+    },
+    {
+      "id": 18,
+      "name": "Designer Evening Gown",
+      "price": 125.99,
+      "image": "https://i.pinimg.com/1200x/b4/9b/d2/b49bd2179c1499f3fd516880bc544ac5.jpg",
+      "category": "women's clothing",
+      "description": "Luxurious designer gown for red carpet",
+      "rating": 4.9
+    },
+    {
+      "id": 19,
+      "name": "Casual Graphic Tee",
+      "price": 22.99,
+      "image": "https://i.pinimg.com/736x/d3/18/d1/d318d1288d5bd6ba4ef98b1edf1adb52.jpg",
+      "category": "women's clothing",
+      "description": "Comfortable graphic t-shirt for daily wear",
+      "rating": 4.2
+    },
+    {
+      "id": 20,
+      "name": "Bohemian Maxi Dress",
+      "price": 58.99,
+      "image": "https://i.pinimg.com/736x/a2/8a/a0/a28aa0a3031fceab574be318b88ad05d.jpg",
+      "category": "women's clothing",
+      "description": "Flowy bohemian style maxi dress",
+      "rating": 4.6
+    },
+    {
+      "id": 21,
+      "name": "Winter Parka Jacket",
+      "price": 89.99,
+      "image": "https://i.pinimg.com/736x/f3/80/72/f38072ef708889bc2c13f4bfd8acd1f1.jpg",
+      "category": "women's clothing",
+      "description": "Warm parka jacket for extreme cold",
+      "rating": 4.5
+    },
+    {
+      "id": 22,
+      "name": "Designer Cocktail Attire",
+      "price": 95.99,
+      "image": "https://i.pinimg.com/1200x/cf/ab/33/cfab33d1809b5707b4d1ca2522ae61f0.jpg",
+      "category": "women's clothing",
+      "description": "Sophisticated cocktail party outfit",
+      "rating": 4.7
+    },
+    {
+      "id": 23,
+      "name": "Casual Summer Shorts",
+      "price": 32.99,
+      "image": "https://i.pinimg.com/1200x/00/20/7b/00207bbde4a49b99152cdae01e04bb1f.jpg",
+      "category": "women's clothing",
+      "description": "Comfortable shorts for summer season",
+      "rating": 4.3
+    },
+    {
+      "id": 24,
+      "name": "Elegant Office Dress",
+      "price": 67.99,
+      "image": "https://i.pinimg.com/1200x/44/07/8a/44078a8d09b22e146bfeebddad047461.jpg",
+      "category": "women's clothing",
+      "description": "Professional office appropriate dress",
+      "rating": 4.5
+    },
+    {
+      "id": 25,
+      "name": "Designer Hoodie Collection",
+      "price": 75.99,
+      "image": "https://i.pinimg.com/736x/33/23/9e/33239e9686a33bbe5ef45c70f6deea3d.jpg",
+      "category": "women's clothing",
+      "description": "Premium designer hoodie collection",
+      "rating": 4.6
+    },
+    {
+      "id": 26,
+      "name": "Evening Sequin Dress",
+      "price": 115.99,
+      "image": "https://i.pinimg.com/1200x/6e/d8/0c/6ed80c17a86f8ff1346c45d731bd0b3c.jpg",
+      "category": "women's clothing",
+      "description": "Glamorous sequin dress for night events",
+      "rating": 4.8
+    },
+    {
+      "id": 27,
       "name": "Men's Casual Shirt - Blue",
       "price": 29.99,
       "image": "https://i.pinimg.com/1200x/9b/60/e2/9b60e28ae765f097871c22bcc14cb6c5.jpg",
@@ -10,7 +244,7 @@
       "rating": 4.5
     },
     {
-      "id": 2,
+      "id": 28,
       "name": "Men's Casual Shirt - White",
       "price": 32.99,
       "image": "https://i.pinimg.com/1200x/24/01/85/2401859c3f6d11708789e2393ee713f8.jpg",
@@ -19,7 +253,7 @@
       "rating": 4.3
     },
     {
-      "id": 3,
+      "id": 29,
       "name": "Men's Casual Shirt - Striped",
       "price": 34.99,
       "image": "https://i.pinimg.com/1200x/3f/cf/0b/3fcf0b6b0a11cee97abcd972bfb75888.jpg",
@@ -28,7 +262,7 @@
       "rating": 4.7
     },
     {
-      "id": 4,
+      "id": 30,
       "name": "Men's Casual Shirt - Checkered",
       "price": 36.99,
       "image": "https://i.pinimg.com/1200x/3b/da/a2/3bdaa20e061799f021981d667e8f44c4.jpg",
@@ -37,7 +271,7 @@
       "rating": 4.4
     },
     {
-      "id": 5,
+      "id": 31,
       "name": "Men's Denim Jeans - Classic",
       "price": 49.99,
       "image": "https://i.pinimg.com/736x/a3/41/56/a34156b32e3d7af6b1a17f3f75c09b15.jpg",
@@ -46,7 +280,7 @@
       "rating": 4.6
     },
     {
-      "id": 6,
+      "id": 32,
       "name": "Men's Denim Jeans - Slim Fit",
       "price": 54.99,
       "image": "https://i.pinimg.com/1200x/97/62/7e/97627e6e6ab2ddb89018aff3c56015ca.jpg",
@@ -55,7 +289,7 @@
       "rating": 4.5
     },
     {
-      "id": 7,
+      "id": 33,
       "name": "Men's Denim Jeans - Dark Wash",
       "price": 59.99,
       "image": "https://i.pinimg.com/1200x/08/a5/c1/08a5c16b2b3497f5ad148430ac51d422.jpg",
@@ -64,7 +298,7 @@
       "rating": 4.8
     },
     {
-      "id": 8,
+      "id": 34,
       "name": "Women's Casual Blouse - Floral",
       "price": 27.99,
       "image": "https://i.pinimg.com/1200x/ea/bc/e0/eabce058ed8bf038fd13465ee88652aa.jpg",
@@ -73,7 +307,7 @@
       "rating": 4.4
     },
     {
-      "id": 9,
+      "id": 35,
       "name": "Women's Casual Blouse - Pink",
       "price": 29.99,
       "image": "https://i.pinimg.com/736x/3f/34/3c/3f343c6f2a4ddd66ebeed9c7dbd0c00b.jpg",
@@ -82,7 +316,7 @@
       "rating": 4.6
     },
     {
-      "id": 10,
+      "id": 36,
       "name": "Women's Casual Blouse - White",
       "price": 31.99,
       "image": "https://i.pinimg.com/1200x/a9/36/ab/a936abc4fbd70fdc56a471744b492947.jpg",
@@ -91,7 +325,7 @@
       "rating": 4.5
     },
     {
-      "id": 11,
+      "id": 37,
       "name": "Women's Denim Jeans - Skinny",
       "price": 45.99,
       "image": "https://i.pinimg.com/736x/26/50/33/265033f6721210c0dd5b7365d6154440.jpg",
@@ -100,7 +334,7 @@
       "rating": 4.3
     },
     {
-      "id": 12,
+      "id": 38,
       "name": "Women's Denim Jeans - Boyfriend",
       "price": 47.99,
       "image": "https://i.pinimg.com/736x/ea/2a/e5/ea2ae54d1cc25393fc93696de6d5e022.jpg",
@@ -109,7 +343,7 @@
       "rating": 4.7
     },
     {
-      "id": 13,
+      "id": 39,
       "name": "Women's Midi Skirt - Flowy",
       "price": 39.99,
       "image": "https://i.pinimg.com/736x/f8/7f/c1/f87fc17e6e025b04bacde0148777f8c6.jpg",
@@ -118,7 +352,7 @@
       "rating": 4.8
     },
     {
-      "id": 14,
+      "id": 40,
       "name": "Women's Midi Skirt - Pleated",
       "price": 42.99,
       "image": "https://i.pinimg.com/1200x/f4/f6/f1/f4f6f1fd673b82dac061cf213cfc6737.jpg",
@@ -127,7 +361,7 @@
       "rating": 4.6
     },
     {
-      "id": 15,
+      "id": 41,
       "name": "Women's Summer Dress - Floral",
       "price": 55.99,
       "image": "https://i.pinimg.com/1200x/83/70/49/837049d78b5b526476d9389448095bac.jpg",
@@ -136,7 +370,7 @@
       "rating": 4.9
     },
     {
-      "id": 16,
+      "id": 42,
       "name": "Women's Summer Dress - Maxi",
       "price": 59.99,
       "image": "https://i.pinimg.com/1200x/c4/1f/e4/c41fe4c718b7728b8e01615508e50a23.jpg",
@@ -145,7 +379,7 @@
       "rating": 4.7
     },
     {
-      "id": 17,
+      "id": 43,
       "name": "Women's Casual Top - Striped",
       "price": 25.99,
       "image": "https://i.pinimg.com/736x/4b/37/17/4b37170594de996e202c61467d4be17d.jpg",
@@ -154,7 +388,7 @@
       "rating": 4.4
     },
     {
-      "id": 18,
+      "id": 44,
       "name": "Men's Formal Shirt - White",
       "price": 44.99,
       "image": "https://i.pinimg.com/1200x/76/25/b2/7625b2a3c06e3e999542317b1e654117.jpg",
@@ -163,7 +397,7 @@
       "rating": 4.5
     },
     {
-      "id": 19,
+      "id": 45,
       "name": "Men's Casual Shirt - Black",
       "price": 33.99,
       "image": "https://i.pinimg.com/1200x/16/7b/e1/167be13eab5c2e40c4facc1c8e2b17cd.jpg",
@@ -172,7 +406,7 @@
       "rating": 4.6
     },
     {
-      "id": 20,
+      "id": 46,
       "name": "Men's Casual Shirt - Gray",
       "price": 31.99,
       "image": "https://i.pinimg.com/736x/3a/cd/60/3acd609002bb044b557a37c88004ef1b.jpg",

@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { CartProvider } from "./context/CartContext";
+import { WishlistProvider } from './context/WishlistContext';
 import Homepage from "./Components/Homepage";
 import Men from "./Components/Men";
 import Women from "./Components/Women";
@@ -11,10 +12,12 @@ import Login from "./Components/Login";
 import Register from "./Components/Register";
 import Cart from "./Components/Cart";
 import ProductDetail from "./context/ProductDetail";
+import Wishlist from "./Components/Wishlist";
 
 const App = () => {
   return (
     <CartProvider>
+      <WishlistProvider>
       <Router>
         <div className="min-h-screen bg-white">
           <Navbar />
@@ -29,11 +32,13 @@ const App = () => {
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/cart" element={<Cart />} />
+              <Route path="/wishlist" element={<Wishlist />} /> 
               <Route path="/product/:id" element={<ProductDetail />} />
             </Routes>
           </main>
         </div>
       </Router>
+      </WishlistProvider>
     </CartProvider>
   );
 };

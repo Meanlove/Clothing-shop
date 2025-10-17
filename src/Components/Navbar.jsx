@@ -1,28 +1,43 @@
-import React, { useState } from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, NavLink, useNavigate, useLocation } from "react-router-dom";
 import { useCart } from "../context/CartContext";
+import { FaHeart } from "react-icons/fa";
+import { useWishlist } from "../context/WishlistContext";
 
 const Navbar = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
+  const location = useLocation();
   const { getCartItemsCount } = useCart();
+  const { getWishlistItemsCount } = useWishlist();
 
-  const handleSearch = (e) => {
-    if (e.key === "Enter" || e.type === "click") {
-      if (searchTerm.trim()) {
-        // Navigate to All Collections page with search parameter
-        navigate(`/all-collections?search=${encodeURIComponent(searchTerm)}`);
-        setSearchTerm("");
-        setIsSearchOpen(false);
-      }
+  // Auto-search when search term changes and we're on all-collections page
+  useEffect(() => {
+    if (location.pathname === "/all-collections" && searchTerm.trim()) {
+      const timer = setTimeout(() => {
+        navigate(`/all-collections?search=${encodeURIComponent(searchTerm.trim())}`, { replace: true });
+      }, 500);
+
+      return () => clearTimeout(timer);
     }
-  };
+  }, [searchTerm, location.pathname, navigate]);
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    handleSearch(e);
+    if (searchTerm.trim()) {
+      navigate(`/all-collections?search=${encodeURIComponent(searchTerm.trim())}`);
+      setSearchTerm("");
+      setIsSearchOpen(false);
+    }
   };
+
+  // Clear search when navigating away from all-collections
+  useEffect(() => {
+    if (location.pathname !== "/all-collections") {
+      setSearchTerm("");
+    }
+  }, [location.pathname]);
 
   return (
     <nav className="fixed top-0 left-0 w-full bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-100 py-3 z-50">
@@ -48,14 +63,15 @@ const Navbar = () => {
           </NavLink>
 
           <div className="hidden lg:flex items-center space-x-1">
-            <NavLink className={({ isActive }) =>
-                  `flex items-center gap-3 group transition-all duration-300 px-4 py-2 rounded-xl transition-all duration-300 font-medium relative group
+            <NavLink
+              className={({ isActive }) =>
+                `flex items-center gap-3 group transition-all duration-300 px-4 py-2 rounded-xl transition-all duration-300 font-medium relative group
                   ${
                     isActive
                       ? "text-amber-600 font-semibold bg-amber-50 border border-amber-200"
                       : "text-gray-600 hover:text-amber-700"
                   }`
-                }
+              }
               to="/"
             >
               Home
@@ -111,9 +127,30 @@ const Navbar = () => {
               placeholder="Search products..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              onKeyPress={(e) => e.key === "Enter" && handleSearch(e)}
               className="w-full bg-gray-50/80 backdrop-blur-sm rounded-2xl pl-10 pr-12 py-3 text-sm border border-gray-200/80 outline-none transition-all duration-300 focus:bg-white focus:border-amber-300 focus:ring-4 focus:ring-amber-100 focus:shadow-lg placeholder-gray-500"
             />
+            {/* Clear Button - Shows when there's text */}
+            {searchTerm && (
+              <button
+                type="button"
+                onClick={() => setSearchTerm("")}
+                className="absolute right-10 top-1/2 transform -translate-y-1/2 p-2 text-gray-400 hover:text-amber-500 transition-colors duration-300"
+              >
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+            )}
             {/* Search Button */}
             <button
               type="submit"
@@ -158,11 +195,40 @@ const Navbar = () => {
             </svg>
           </button>
 
+          {/* Wishlist Icon */}
+          <div className="relative group">
+            <NavLink
+              to="/wishlist"
+              className="p-2 rounded-xl text-gray-600 hover:text-amber-600 hover:bg-amber-50 transition-all duration-300 relative flex items-center hover:scale-105 active:scale-95"
+            >
+              <FaHeart className="w-5 h-5" />
+              
+              {/* Wishlist Count Badge */}
+              {getWishlistItemsCount() > 0 && (
+                <span className="absolute -top-1 -right-1 bg-red-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-semibold">
+                  {getWishlistItemsCount()}
+                </span>
+              )}
+            </NavLink>
+
+            {/* Wishlist tooltip */}
+            <div className="absolute top-full right-0 mt-2 w-48 bg-white rounded-xl shadow-lg border border-gray-100 p-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+              <p className="text-sm text-gray-600 font-medium">
+                {getWishlistItemsCount()} items in wishlist
+              </p>
+              <div className="mt-1 bg-pink-50 rounded-lg p-2">
+                <p className="text-xs text-pink-700">
+                  Save your favorite items!
+                </p>
+              </div>
+            </div>
+          </div>
+
           {/* Cart with badge */}
           <div className="relative group">
             <NavLink
               to="/cart"
-              className="p-2 rounded-xl text-gray-600 hover:text-amber-600 hover:bg-amber-50 transition-all duration-300 relative flex items-center"
+              className="p-2 rounded-xl text-gray-600 hover:text-amber-600 hover:bg-amber-50 transition-all duration-300 relative flex items-center hover:scale-105 active:scale-95"
             >
               {/* Cart Icon */}
               <svg
