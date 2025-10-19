@@ -138,7 +138,7 @@ const Cart = () => {
           html: `
             <div class="text-center">
               <p class="mb-4">Thank you for your purchase!</p>
-              <div class="bg-green-50 rounded-lg p-4 mb-4">
+              <div class="bg-green-50 rounded-lg p-4 mb-4  ">
                 <p><strong>Order Total:</strong> $${getTotal().toFixed(2)}</p>
                 <p><strong>Items:</strong> ${getCartItemsCount()}</p>
                 <p class="text-sm text-green-600 mt-2">Your order will be shipped within 2-3 business days</p>
@@ -151,7 +151,7 @@ const Cart = () => {
           draggable: true,
           customClass: {
             popup: "rounded-2xl",
-            confirmButton: "px-6 py-3 rounded-xl font-semibold",
+            confirmButton: "px-6 py-3 rounded-xl font-semibold ",
           },
         }).then((result) => {
           if (result.isConfirmed) {
@@ -159,29 +159,7 @@ const Cart = () => {
             navigate("/all-collections");
           }
         });
-      } else {
-        // Payment failed
-        Swal.fire({
-          title: "Payment Failed",
-          text: "There was an issue processing your payment. Please try again.",
-          icon: "error",
-          confirmButtonText: "Try Again",
-          cancelButtonText: "Cancel",
-          showCancelButton: true,
-          confirmButtonColor: "#EF4444",
-          cancelButtonColor: "#6B7280",
-          draggable: true,
-          customClass: {
-            popup: "rounded-2xl",
-            confirmButton: "px-6 py-3 rounded-xl font-semibold",
-            cancelButton: "px-6 py-3 rounded-xl font-semibold",
-          },
-        }).then((result) => {
-          if (result.isConfirmed) {
-            proceedToCheckout(); // Retry payment
-          }
-        });
-      }
+      } 
     }, 2000);
   };
 

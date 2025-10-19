@@ -126,7 +126,7 @@ const Navbar = () => {
           }`}
         >
           <form onSubmit={handleSearchSubmit} className="relative group">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <div className="absolute  inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
               <svg
                 className="w-5 h-5 text-gray-400 group-hover:text-amber-500 transition-colors duration-300"
                 fill="none"
@@ -143,10 +143,10 @@ const Navbar = () => {
             </div>
             <input
               type="text"
-              placeholder="Search products..."
+              placeholder="Search..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full bg-gray-50/80 backdrop-blur-sm rounded-2xl pl-10 pr-12 py-3 text-sm border border-gray-200/80 outline-none transition-all duration-300 focus:bg-white focus:border-amber-300 focus:ring-4 focus:ring-amber-100 focus:shadow-lg placeholder-gray-500"
+              className="w-full bg-gray-50/80 backdrop-blur-sm  rounded-2xl pl-5 pr-12 py-3 text-sm border border-gray-200/80 outline-none transition-all duration-300 focus:bg-white focus:border-amber-300 focus:ring-4 focus:ring-amber-100 focus:shadow-lg placeholder-gray-500"
             />
             {/* Clear Button - Shows when there's text */}
             {searchTerm && (
@@ -249,20 +249,8 @@ const Navbar = () => {
               to="/cart"
               className="p-2 rounded-xl text-gray-600 hover:text-amber-600 hover:bg-amber-50 transition-all duration-300 relative flex items-center hover:scale-105 active:scale-95"
             >
-              {/* Cart Icon */}
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5.5M7 13l2.5 5.5m0 0L17 21m-7.5-2.5h9"
-                />
-              </svg>
+              {/* Cart Icon from Font Awesome */}
+              <i className="fa-solid fa-cart-shopping text-lg"></i>
 
               {/* Cart Count Badge */}
               {getCartItemsCount() > 0 && (
@@ -271,13 +259,12 @@ const Navbar = () => {
                 </span>
               )}
             </NavLink>
-
             {/* Cart tooltip */}
-            <div className="absolute top-full right-0 mt-2 w-64 bg-white rounded-xl shadow-lg border border-gray-100 p-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+            <div className="absolute top-full right-2 mt-2 w-50 bg-white rounded-xl shadow-lg border border-gray-100 p-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
               <p className="text-sm text-gray-600 font-medium">
                 {getCartItemsCount()} items in cart
               </p>
-              <div className="mt-2 bg-amber-50 rounded-lg p-2">
+              <div className=" bg-amber-50 rounded-lg p-2">
                 <p className="text-xs text-amber-700">
                   Free shipping on all orders!
                 </p>

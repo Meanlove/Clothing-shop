@@ -666,7 +666,7 @@ const AllCollections = () => {
               <h4 className="font-bold text-white text-lg mb-2">
                 Free Shipping
               </h4>
-              <p className="text-gray-300">On orders over $50</p>
+              <p className="text-gray-300">On all orders!</p>
             </div>
 
             <div className="text-center">
