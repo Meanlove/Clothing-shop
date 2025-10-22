@@ -307,7 +307,7 @@ const Navbar = () => {
           </div>
 
           {/* ✅ FIXED: Mobile Menu Button with onClick handler */}
-          <button 
+          <button
             onClick={toggleMobileMenu} // ✅ ADDED ONCLICK
             className="lg:hidden p-2 rounded-xl text-gray-600 hover:text-amber-600 hover:bg-amber-50 transition-all duration-300"
           >
@@ -399,6 +399,7 @@ const Navbar = () => {
       )}
 
       {/* ✅ ADDED: Mobile Menu - Shows when toggled */}
+      {/* ✅ ADDED: Mobile Menu - Shows when toggled */}
       {isMobileMenuOpen && (
         <div className="lg:hidden border-t border-gray-100 bg-white">
           <div className="px-6 py-4">
@@ -407,12 +408,12 @@ const Navbar = () => {
                 to="/"
                 onClick={() => setIsMobileMenuOpen(false)}
                 className={({ isActive }) =>
-                  `block px-4 py-3 rounded-xl transition-all duration-300 font-medium
-                  ${
-                    isActive
-                      ? "text-amber-600 font-semibold bg-amber-50 border border-amber-200"
-                      : "text-gray-600 hover:text-amber-700 hover:bg-amber-50"
-                  }`
+                  `block px-4 py-3 rounded-xl transition-all duration-300 font-medium text-center
+            ${
+              isActive
+                ? "text-amber-600 font-semibold bg-amber-50 border border-amber-200"
+                : "text-gray-600 hover:text-amber-700 hover:bg-amber-50"
+            }`
                 }
               >
                 Home
