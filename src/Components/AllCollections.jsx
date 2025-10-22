@@ -338,7 +338,7 @@ const AllCollections = () => {
               </select>
 
               {/* Price Range */}
-              <div className="flex items-center gap-4">
+              {/* <div className="flex items-center gap-4">
                 <span className="text-sm text-gray-600 whitespace-nowrap">
                   Price: ${priceRange[0]} - ${priceRange[1]}
                 </span>
@@ -353,7 +353,7 @@ const AllCollections = () => {
                   }
                   className="w-32 accent-blue-600"
                 />
-              </div>
+              </div> */}
 
               {/* Reset Filters */}
               <button

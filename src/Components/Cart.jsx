@@ -114,55 +114,35 @@ const Cart = () => {
   };
 
   const processPayment = () => {
-    // Simulate payment processing
-    Swal.fire({
-      title: "Processing Payment...",
-      text: "Please wait while we process your payment",
-      icon: "info",
-      showConfirmButton: false,
-      allowOutsideClick: false,
-      draggable: false,
-      didOpen: () => {
-        Swal.showLoading();
-      },
-    });
-
-    // Simulate API call
-    setTimeout(() => {
-      const paymentSuccessful = Math.random() > 0.2; // 80% success rate
-
-      if (paymentSuccessful) {
-        // Payment successful
-        Swal.fire({
-          title: "Payment Successful! 🎉",
-          html: `
-            <div class="text-center">
-              <p class="mb-4">Thank you for your purchase!</p>
-              <div class="bg-green-50 rounded-lg p-4 mb-4  ">
-                <p><strong>Order Total:</strong> $${getTotal().toFixed(2)}</p>
-                <p><strong>Items:</strong> ${getCartItemsCount()}</p>
-                <p class="text-sm text-green-600 mt-2">Your order will be shipped within 2-3 business days</p>
-              </div>
-            </div>
-          `,
-          icon: "success",
-          confirmButtonText: "Continue Shopping",
-          confirmButtonColor: "#3B82F6",
-          draggable: true,
-          customClass: {
-            popup: "rounded-2xl",
-            confirmButton: "px-6 py-3 rounded-xl font-semibold ",
-          },
-        }).then((result) => {
-          if (result.isConfirmed) {
-            clearCart();
-            navigate("/all-collections");
-          }
-        });
-      } 
-    }, 2000);
-  };
-
+  // Payment successful immediately
+  Swal.fire({
+    title: "Payment Successful! 🎉",
+    html: `
+      <div class="text-center">
+        <p class="mb-4">Thank you for your purchase!</p>
+        <div class="bg-green-50 rounded-lg p-4 mb-4">
+          <p><strong>Order Total:</strong> $${getTotal().toFixed(2)}</p>
+          <p><strong>Items:</strong> ${getCartItemsCount()}</p>
+          <p class="text-sm text-green-600 mt-2">Your order will be shipped within 2-3 business days</p>
+        </div>
+      </div>
+    `,
+    icon: "success",
+    confirmButtonText: "Continue Shopping",
+    confirmButtonColor: "#3B82F6",
+    draggable: true,
+    customClass: {
+      popup: "rounded-2xl",
+      confirmButton: "px-6 py-3 rounded-xl font-semibold bg-blue-600 hover:bg-blue-700 text-white hover:scale-105 transition-all duration-300",
+    },
+    buttonsStyling: false,
+  }).then((result) => {
+    if (result.isConfirmed) {
+      clearCart();
+      navigate("/all-collections");
+    }
+  });
+};
   if (cartItems.length === 0) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">

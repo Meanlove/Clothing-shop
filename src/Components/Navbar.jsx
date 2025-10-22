@@ -6,6 +6,7 @@ import { useWishlist } from "../context/WishlistContext";
 
 const Navbar = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // ✅ ADDED MOBILE MENU STATE
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
@@ -44,6 +45,11 @@ const Navbar = () => {
     }
   }, [location.pathname]);
 
+  // ✅ ADDED MOBILE MENU TOGGLE FUNCTION
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
   return (
     <nav className="fixed top-0 left-0 w-full bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-100 py-3 z-50">
       <div className="max-w-7xl mx-auto flex justify-between items-center px-6">
@@ -67,21 +73,6 @@ const Navbar = () => {
             </span>
           </NavLink>
 
-          {/* <div className="hidden lg:flex items-center space-x-1">
-            <NavLink
-              className={({ isActive }) =>
-                `transition-all duration-300 px-4 py-2 rounded-xl  font-medium relative group
-                  ${
-                    isActive
-                      ? "text-amber-600 font-semibold bg-amber-50 border border-amber-200"
-                      : "text-gray-600 hover:text-amber-700"
-                  }`
-              }
-              to="/"
-            >
-              Home
-            </NavLink>
-          </div> */}
           {/* Navigation Links */}
           <div className="hidden lg:flex items-center space-x-1">
             {[
@@ -117,16 +108,10 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* ✅ Middle: Search Bar */}
-        <div
-          className={`flex-1 max-w-lg mx-8 transition-all duration-500 ${
-            isSearchOpen
-              ? "opacity-100 scale-100"
-              : "opacity-0 scale-95 lg:opacity-100 lg:scale-100"
-          }`}
-        >
+        {/* ✅ Middle: Search Bar - FIXED FOR DESKTOP */}
+        <div className="hidden lg:block flex-1 max-w-lg mx-8">
           <form onSubmit={handleSearchSubmit} className="relative group">
-            <div className="absolute  inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
               <svg
                 className="w-5 h-5 text-gray-400 group-hover:text-amber-500 transition-colors duration-300"
                 fill="none"
@@ -146,7 +131,7 @@ const Navbar = () => {
               placeholder="Search..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full bg-gray-50/80 backdrop-blur-sm  rounded-2xl pl-5 pr-12 py-3 text-sm border border-gray-200/80 outline-none transition-all duration-300 focus:bg-white focus:border-amber-300 focus:ring-4 focus:ring-amber-100 focus:shadow-lg placeholder-gray-500"
+              className="w-full bg-gray-50/80 backdrop-blur-sm rounded-2xl pl-10 pr-12 py-3 text-sm border border-gray-200/80 outline-none transition-all duration-300 focus:bg-white focus:border-amber-300 focus:ring-4 focus:ring-amber-100 focus:shadow-lg placeholder-gray-500"
             />
             {/* Clear Button - Shows when there's text */}
             {searchTerm && (
@@ -321,8 +306,11 @@ const Navbar = () => {
             </NavLink>
           </div>
 
-          {/* Mobile Menu Button */}
-          <button className="lg:hidden p-2 rounded-xl text-gray-600 hover:text-amber-600 hover:bg-amber-50 transition-all duration-300">
+          {/* ✅ FIXED: Mobile Menu Button with onClick handler */}
+          <button 
+            onClick={toggleMobileMenu} // ✅ ADDED ONCLICK
+            className="lg:hidden p-2 rounded-xl text-gray-600 hover:text-amber-600 hover:bg-amber-50 transition-all duration-300"
+          >
             <svg
               className="w-5 h-5"
               fill="none"
@@ -339,6 +327,114 @@ const Navbar = () => {
           </button>
         </div>
       </div>
+
+      {/* Mobile Search Bar - Shows when toggled */}
+      {isSearchOpen && (
+        <div className="lg:hidden px-6 py-3 border-t border-gray-100 bg-white">
+          <form onSubmit={handleSearchSubmit} className="relative">
+            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <svg
+                className="w-5 h-5 text-gray-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                />
+              </svg>
+            </div>
+            <input
+              type="text"
+              placeholder="Search products..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full bg-gray-50 rounded-xl pl-10 pr-12 py-3 text-sm border border-gray-200 outline-none focus:bg-white focus:border-amber-300 focus:ring-2 focus:ring-amber-100"
+              autoFocus
+            />
+            {searchTerm && (
+              <button
+                type="button"
+                onClick={() => setSearchTerm("")}
+                className="absolute right-10 top-1/2 transform -translate-y-1/2 p-2 text-gray-400 hover:text-amber-500"
+              >
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+            )}
+            <button
+              type="submit"
+              className="absolute right-2 top-1/2 transform -translate-y-1/2 p-2 text-gray-400 hover:text-amber-500"
+            >
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                />
+              </svg>
+            </button>
+          </form>
+        </div>
+      )}
+
+      {/* ✅ ADDED: Mobile Menu - Shows when toggled */}
+      {isMobileMenuOpen && (
+        <div className="lg:hidden border-t border-gray-100 bg-white">
+          <div className="px-6 py-4">
+            <div className="space-y-3">
+              <NavLink
+                to="/"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className={({ isActive }) =>
+                  `block px-4 py-3 rounded-xl transition-all duration-300 font-medium
+                  ${
+                    isActive
+                      ? "text-amber-600 font-semibold bg-amber-50 border border-amber-200"
+                      : "text-gray-600 hover:text-amber-700 hover:bg-amber-50"
+                  }`
+                }
+              >
+                Home
+              </NavLink>
+              <NavLink
+                to="/login"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="block px-4 py-3 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 text-white font-medium text-center hover:from-amber-500 hover:to-amber-600 transition-all duration-300"
+              >
+                Login
+              </NavLink>
+              <NavLink
+                to="/register"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="block px-4 py-3 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-white font-medium text-center hover:from-amber-600 hover:to-amber-700 transition-all duration-300"
+              >
+                Register
+              </NavLink>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Mobile Navigation */}
       <div className="lg:hidden border-t border-gray-100 mt-3 pt-3 px-6">

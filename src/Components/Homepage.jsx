@@ -46,7 +46,7 @@ const Homepage = () => {
     {
       icon: <FaShippingFast className="text-2xl" />,
       title: "Free Shipping",
-      description: "On orders over $50",
+      description: "On all orders!",
     },
     {
       icon: <FaShieldAlt className="text-2xl" />,
