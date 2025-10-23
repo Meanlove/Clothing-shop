@@ -314,59 +314,62 @@ const Women = () => {
                     </h3>
 
                     {/* ✅ ADD SIZE SELECTOR */}
-                    <div className="mb-3">
-                      <label className="block text-md font-medium text-gray-700 mb-2">
-                        Size:
-                        <span className="ml-2 text-lg font-bold text-blue-600 bg-blue-50 px-3 py-1 rounded-lg border border-blue-200">
-                          {selectedSizes[item.id]}
-                        </span>
-                      </label>
-                      <div className="relative">
-                        {/* Size Display Button */}
-                        <button
-                          onClick={(e) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            toggleSizeDropdown(item.id);
-                          }}
-                          className="w-[60px] px-3 py-2 bg-gray-50 border border-gray-300 rounded-xl text-left focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 flex items-center justify-between hover:bg-gray-100"
-                        >
-                          <span className="text-gray-700 font-medium">
-                            {selectedSizes[item.id]}
+                    <div className=" mb-3">
+                        <label className="flex gap-3 text-md font-medium text-gray-700 mb-2">
+                          <span className="py-2 text-1xl font-bold">
+                          Size:
                           </span>
-                          <FaChevronDown
-                            className={`text-gray-400 transition-transform duration-300 ${
-                              openSizeDropdowns[item.id] ? "rotate-180" : ""
-                            }`}
-                          />
-                        </button>
+                          {/* <span className="ml-2 text-lg font-bold text-blue-600 bg-blue-50 px-3 py-1 rounded-lg border border-blue-200">
+                            {selectedSizes[item.id]}
+                            </span> */}
+                            <button
+                            onClick={(e) => {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              toggleSizeDropdown(item.id);
+                            }}
+                            className="w-[40px] px-3 py-2 bg-gray-50 border border-gray-300 rounded-xl text-left focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 flex items-center justify-between hover:bg-gray-100"
+                            >
+                            <span className="text-gray-700 font-medium">
+                              {selectedSizes[item.id]}
+                            </span>
+                            {/* <FaChevronDown
+                              className={`text-gray-400 transition-transform duration-300 ${
+                                openSizeDropdowns[item.id] ? "rotate-180" : ""
+                                }`}
+                                /> */}
+                          </button>
+                            </label>
+                        <div className="relative">
+                          {/* Size Display Button */}
+                          
 
-                        {/* Dropdown Menu - HORIZONTAL LAYOUT */}
-                        {openSizeDropdowns[item.id] && (
-                          <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-gray-200 rounded-xl shadow-lg z-10 p-3">
-                            <div className="flex flex-wrap gap-2 justify-center">
-                              {item.sizes?.map((size) => (
-                                <button
-                                  key={size}
-                                  onClick={(e) => {
-                                    e.preventDefault();
-                                    e.stopPropagation();
-                                    handleSizeSelect(item.id, size);
-                                  }}
-                                  className={`min-w-[40px] px-3 py-2 rounded-lg border transition-all duration-200 hover:scale-105 active:scale-95 font-medium ${
-                                    selectedSizes[item.id] === size
-                                      ? "border-blue-600 bg-blue-600 text-white shadow-md"
-                                      : "border-gray-300 bg-gray-50 text-gray-700 hover:border-blue-400 hover:bg-blue-50"
-                                  }`}
-                                >
-                                  {size}
-                                </button>
-                              ))}
+                          {/* Dropdown Menu - HORIZONTAL LAYOUT */}
+                          {openSizeDropdowns[item.id] && (
+                            <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-gray-200 rounded-xl shadow-lg z-10 p-3">
+                              <div className="flex flex-wrap gap-2 justify-center">
+                                {item.sizes?.map((size) => (
+                                  <button
+                                    key={size}
+                                    onClick={(e) => {
+                                      e.preventDefault();
+                                      e.stopPropagation();
+                                      handleSizeSelect(item.id, size);
+                                    }}
+                                    className={`min-w-[40px] px-3 py-2 rounded-lg border transition-all duration-200 hover:scale-105 active:scale-95 font-medium ${
+                                      selectedSizes[item.id] === size
+                                        ? "border-blue-600 bg-blue-600 text-white shadow-md"
+                                        : "border-gray-300 bg-gray-50 text-gray-700 hover:border-blue-400 hover:bg-blue-50"
+                                    }`}
+                                  >
+                                    {size}
+                                  </button>
+                                ))}
+                              </div>
                             </div>
-                          </div>
-                        )}
+                          )}
+                        </div>
                       </div>
-                    </div>
 
                     <div className="flex items-center justify-between">
                       <div className="flex flex-col">
