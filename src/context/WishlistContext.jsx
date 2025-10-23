@@ -1,5 +1,6 @@
 // context/WishlistContext.js
 import React, { createContext, useContext, useReducer, useEffect } from 'react';
+import Swal from 'sweetalert2';
 
 const WishlistContext = createContext();
 
@@ -76,17 +77,98 @@ export const WishlistProvider = ({ children }) => {
 
   // Actions
   const addToWishlist = (product) => {
+    const alreadyInWishlist = state.items.some(item => item.id === product.id);
+    
+    if (alreadyInWishlist) {
+      // Show info alert if already in wishlist
+      Swal.fire({
+        title: 'Already in favorite! 💖',
+        html: `
+          <div class="flex items-center gap-3">
+            <img src="${product.image}" alt="${product.name}" class="w-10 h-10 rounded-lg object-cover">
+            <div class="text-left">
+              <p class="font-semibold text-gray-800">${product.name}</p>
+              <p class="text-sm text-gray-600">This item is already in your favorite</p>
+            </div>
+          </div>
+        `,
+        icon: 'info',
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 2000,
+        toast: true,
+        background: '#fef7ff',
+        border: '1px solid #e9d5ff',
+        customClass: {
+          popup: 'rounded-xl shadow-xl'
+        }
+      });
+      return; // Don't add duplicate
+    }
+
     dispatch({
       type: WISHLIST_ACTIONS.ADD_TO_WISHLIST,
       payload: product
     });
+
+    // Show success alert for new item
+    Swal.fire({
+      title: 'Added to favorite! 💖',
+      html: `
+        <div class="flex items-center gap-3">
+          <img src="${product.image}" alt="${product.name}" class="w-10 h-10 rounded-lg object-cover">
+          <div class="text-left">
+            <p class="font-semibold text-gray-800">${product.name}</p>
+            <p class="text-sm text-gray-600">Successfully added to favorite</p>
+          </div>
+        </div>
+      `,
+      icon: 'success',
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 2000,
+      toast: true,
+      background: '#fef7ff',
+      border: '1px solid #e9d5ff',
+      customClass: {
+        popup: 'rounded-xl shadow-xl'
+      }
+    });
   };
 
   const removeFromWishlist = (productId) => {
+    const product = state.items.find(item => item.id === productId);
+    
     dispatch({
       type: WISHLIST_ACTIONS.REMOVE_FROM_WISHLIST,
       payload: productId
     });
+
+    // Show removed alert
+    if (product) {
+      Swal.fire({
+        title: 'Removed from favorite! 💔',
+        html: `
+          <div class="flex items-center gap-3">
+            <img src="${product.image}" alt="${product.name}" class="w-10 h-10 rounded-lg object-cover">
+            <div class="text-left">
+              <p class="font-semibold text-gray-800">${product.name}</p>
+              <p class="text-sm text-gray-600">Removed from your favorite</p>
+            </div>
+          </div>
+        `,
+        icon: 'info',
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 2000,
+        toast: true,
+        background: '#fef7ff',
+        border: '1px solid #e9d5ff',
+        customClass: {
+          popup: 'rounded-xl shadow-xl'
+        }
+      });
+    }
   };
 
   const clearWishlist = () => {

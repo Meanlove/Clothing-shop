@@ -12,39 +12,41 @@ import {
   FaMinus,
 } from "react-icons/fa";
 import { useCart } from "../context/CartContext";
-import { useWishlist } from "../context/WishlistContext"; // ✅ ADD THIS IMPORT
+import { useWishlist } from "../context/WishlistContext";
 
 const ProductDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { addToCart } = useCart();
-  const { toggleWishlist, isInWishlist } = useWishlist(); // ✅ ADD THIS LINE
+  const { toggleWishlist, isInWishlist } = useWishlist();
   const [product, setProduct] = useState(null);
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
-
-  // ✅ REMOVE OLD WISHLIST STATE
-  // const [wishlist, setWishlist] = useState(new Set());
+  const [selectedSize, setSelectedSize] = useState(""); // ✅ ADD SIZE STATE
 
   useEffect(() => {
-    // Fetch from local JSON
     fetch("/data/products.json")
       .then((res) => res.json())
       .then((json) => {
         const foundProduct = json.products.find((p) => p.id === parseInt(id));
         
-        // Data transformation
         const transformedProduct = foundProduct ? {
           ...foundProduct,
           title: foundProduct.name || foundProduct.title,
           rating: {
             rate: foundProduct.rating || 4.5,
             count: foundProduct.ratingCount || Math.floor(Math.random() * 200) + 50
-          }
+          },
+          // ✅ ADD SIZES DATA - DEFAULT SIZES IF NOT PROVIDED
+          sizes: foundProduct.sizes || ["S", "M", "L", "XL"]
         } : null;
         
         setProduct(transformedProduct);
+        // ✅ SET DEFAULT SIZE WHEN PRODUCT LOADS
+        if (transformedProduct) {
+          setSelectedSize(transformedProduct.sizes[0]);
+        }
         setLoading(false);
       })
       .catch((err) => {
@@ -68,19 +70,8 @@ const ProductDetail = () => {
     }
   }, [product]);
 
-  // ✅ REMOVE OLD TOGGLE WISHLIST FUNCTION
-  // const toggleWishlist = () => {
-  //   const newWishlist = new Set(wishlist);
-  //   if (newWishlist.has(product.id)) {
-  //     newWishlist.delete(product.id);
-  //   } else {
-  //     newWishlist.add(product.id);
-  //   }
-  //   setWishlist(newWishlist);
-  // };
-
   const handleAddToCart = () => {
-    // ✅ ADD QUANTITY TO CART
+    // ✅ INCLUDE SELECTED SIZE IN CART ITEM
     for (let i = 0; i < quantity; i++) {
       addToCart({
         id: product.id,
@@ -88,6 +79,7 @@ const ProductDetail = () => {
         price: product.price,
         image: product.image,
         category: product.category,
+        size: selectedSize, // ✅ ADD SIZE TO CART
       });
     }
   };
@@ -100,6 +92,11 @@ const ProductDetail = () => {
     if (quantity > 1) {
       setQuantity((prev) => prev - 1);
     }
+  };
+
+  // ✅ SIZE SELECTION HANDLER
+  const handleSizeSelect = (size) => {
+    setSelectedSize(size);
   };
 
   if (loading) {
@@ -213,6 +210,33 @@ const ProductDetail = () => {
                 {product.description}
               </p>
 
+              {/* ✅ SIZE SELECTOR */}
+              <div className="mb-8">
+                <div className="flex items-center gap-4 mb-4">
+                  <span className="text-sm font-medium text-gray-700">
+                    Size:
+                  </span>
+                  <span className="text-sm text-blue-600 font-medium">
+                    {selectedSize}
+                  </span>
+                </div>
+                <div className="flex gap-3">
+                  {product.sizes?.map((size) => (
+                    <button
+                      key={size}
+                      onClick={() => handleSizeSelect(size)}
+                      className={`px-6 py-3 border-2 rounded-xl font-medium transition-all duration-300 hover:scale-105 active:scale-95 ${
+                        selectedSize === size
+                          ? "border-blue-600 bg-blue-50 text-blue-600"
+                          : "border-gray-300 text-gray-700 hover:border-blue-400"
+                      }`}
+                    >
+                      {size}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
               {/* Quantity Selector */}
               <div className="flex items-center gap-4 mb-8">
                 <span className="text-sm font-medium text-gray-700">
@@ -247,15 +271,15 @@ const ProductDetail = () => {
                   Add to Cart - ${(product.price * quantity).toFixed(2)}
                 </button>
                 <button
-                  onClick={() => toggleWishlist(product)} // ✅ CHANGE TO THIS
+                  onClick={() => toggleWishlist(product)}
                   className={`px-6 py-4 rounded-xl font-semibold transition-all duration-300 flex items-center justify-center gap-2 hover:scale-105 active:scale-95 ${
-                    isInWishlist(product.id) // ✅ CHANGE TO THIS
+                    isInWishlist(product.id)
                       ? "bg-red-500 text-white hover:bg-red-600"
                       : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                   }`}
                 >
                   <FaHeart />
-                  {isInWishlist(product.id) ? "In Wishlist" : "Wishlist"} {/* ✅ CHANGE TO THIS */}
+                  {isInWishlist(product.id) ? "In favorite" : "Favorite"}
                 </button>
               </div>
 

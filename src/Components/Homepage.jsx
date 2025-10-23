@@ -270,9 +270,38 @@ const Homepage = () => {
                   src="https://i.pinimg.com/1200x/7a/bf/2c/7abf2ca43b62487de9aa4cfc62686e84.jpg"
                   alt="CLOTHING SHOP"
                 />
-                <span className="font-bold text-3xl bg-gradient-to-r from-amber-400 to-amber-600 bg-clip-text text-transparent">
+                <span className="font-bold text-2xl wave-text">
                   CLOTHING SHOP
                 </span>
+
+                <style jsx>{`
+                  .wave-text {
+                    background: linear-gradient(
+                      90deg,
+                      #ef4444,
+                      #f59e0b,
+                      #10b981,
+                      #3b82f6,
+                      #8b5cf6,
+                      #ec4899,
+                      #ef4444
+                    );
+                    background-size: 400% 100%;
+                    -webkit-background-clip: text;
+                    background-clip: text;
+                    color: transparent;
+                    animation: wave 4s linear infinite;
+                  }
+
+                  @keyframes wave {
+                    0% {
+                      background-position: 0% 50%;
+                    }
+                    100% {
+                      background-position: 400% 50%;
+                    }
+                  }
+                `}</style>
               </div>
               <p className="text-gray-300 text-lg leading-relaxed mb-6 max-w-xl">
                 Your premier destination for trendy and affordable fashion.
@@ -371,7 +400,7 @@ const Homepage = () => {
           </div>
 
           {/* Features Section */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mt-16 pt-12 border-t border-gray-700">
+          {/* <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mt-16 pt-12 border-t border-gray-700">
             <div className="text-center">
               <div className="w-16 h-16 bg-amber-500 rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-white font-bold text-2xl">🚚</span>
@@ -411,7 +440,7 @@ const Homepage = () => {
               </h4>
               <p className="text-gray-300">Always here to help</p>
             </div>
-          </div>
+          </div> */}
         </div>
 
         {/* Bottom Footer */}

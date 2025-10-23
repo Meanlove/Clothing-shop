@@ -53,9 +53,9 @@ const About = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-purple-600/10 to-blue-600/10"></div>
         <div className="relative max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent mb-6">
-              About <span className="text-amber-500">CLOTHING SHOP</span>
-            </h1>
+            <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-purple-600 via-pink-500 to-blue-600 bg-clip-text text-transparent mb-6 animate-pulse">
+  About <span className="text-amber-500 animate-bounce inline-block">CLOTHING SHOP</span>
+</h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
               Preserving Cambodian heritage through contemporary fashion, one stitch at a time
             </p>

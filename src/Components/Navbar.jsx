@@ -68,9 +68,36 @@ const Navbar = () => {
               />
               <div className="absolute inset-0 rounded-full bg-amber-500/20 group-hover:bg-amber-500/30 transition-colors duration-300"></div>
             </div>
-            <span className="font-bold text-2xl bg-gradient-to-r from-gray-800 to-amber-600 bg-clip-text text-transparent">
-              CLOTHING SHOP
-            </span>
+            <span className="font-bold text-2xl wave-text">CLOTHING SHOP</span>
+
+            <style jsx>{`
+              .wave-text {
+                background: linear-gradient(
+                  90deg,
+                  #ef4444,
+                  #f59e0b,
+                  #10b981,
+                  #3b82f6,
+                  #8b5cf6,
+                  #ec4899,
+                  #ef4444
+                );
+                background-size: 400% 100%;
+                -webkit-background-clip: text;
+                background-clip: text;
+                color: transparent;
+                animation: wave 4s linear infinite;
+              }
+
+              @keyframes wave {
+                0% {
+                  background-position: 0% 50%;
+                }
+                100% {
+                  background-position: 400% 50%;
+                }
+              }
+            `}</style>
           </NavLink>
 
           {/* Navigation Links */}
@@ -218,7 +245,7 @@ const Navbar = () => {
             {/* Wishlist tooltip */}
             <div className="absolute top-full right-0 mt-2 w-48 bg-white rounded-xl shadow-lg border border-gray-100 p-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
               <p className="text-sm text-gray-600 font-medium">
-                {getWishlistItemsCount()} items in wishlist
+                {getWishlistItemsCount()} items in favorite
               </p>
               <div className="mt-1 bg-pink-50 rounded-lg p-2">
                 <p className="text-xs text-pink-700">
