@@ -52,7 +52,7 @@ const Navbar = () => {
 
   return (
     <nav className="fixed top-0 left-0 w-full bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-100 py-3 z-50">
-      <div className="max-w-7xl mx-auto flex justify-between items-center px-6">
+      <div className=" w-[95%] mx-auto flex justify-between items-center px-6">
         {/* ✅ Left: Logo & Navigation */}
         <div className="flex items-center space-x-8">
           {/* Logo */}
@@ -62,7 +62,7 @@ const Navbar = () => {
           >
             <div className="relative">
               <img
-                className="w-10 h-10 rounded-full border-2 border-gray-300 object-cover group-hover:border-amber-500 transition-colors duration-300"
+                className="w-13 h-13 rounded-full border-2 border-gray-300 object-cover group-hover:border-amber-500 transition-colors duration-300"
                 src="https://i.pinimg.com/1200x/7a/bf/2c/7abf2ca43b62487de9aa4cfc62686e84.jpg"
                 alt="Fashion Store Logo"
               />
@@ -106,7 +106,7 @@ const Navbar = () => {
               { path: "/", label: "Home" },
               { path: "/men", label: "Men" },
               { path: "/women", label: "Women" },
-              { path: "/all-collections", label: "All Collections" },
+              { path: "/all-collections", label: "All Col" },
             ].map((item) => (
               <NavLink
                 key={item.path}
@@ -158,7 +158,7 @@ const Navbar = () => {
               placeholder="Search..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full bg-gray-50/80 backdrop-blur-sm rounded-2xl pl-10 pr-12 py-3 text-sm border border-gray-200/80 outline-none transition-all duration-300 focus:bg-white focus:border-amber-300 focus:ring-4 focus:ring-amber-100 focus:shadow-lg placeholder-gray-500"
+              className="w-[150px] bg-gray-50/80 backdrop-blur-sm rounded-2xl pl-10 pr-12 py-3 text-sm border border-gray-200/80 outline-none transition-all duration-300 focus:bg-white focus:border-amber-300 focus:ring-4 focus:ring-amber-100 focus:shadow-lg placeholder-gray-500"
             />
             {/* Clear Button - Shows when there's text */}
             {searchTerm && (
@@ -185,7 +185,7 @@ const Navbar = () => {
             {/* Search Button */}
             <button
               type="submit"
-              className="absolute right-2 top-1/2 transform -translate-y-1/2 p-2 text-gray-400 hover:text-amber-500 transition-colors duration-300"
+              className="absolute right-40 top-1/2 transform -translate-y-1/2 p-2 text-gray-400 hover:text-amber-500 transition-colors duration-300"
             >
               <svg
                 className="w-4 h-4"
@@ -225,6 +225,36 @@ const Navbar = () => {
               />
             </svg>
           </button>
+          <div className="hidden lg:flex items-center space-x-1">
+            {[
+              { path: "/about", label: "About" },
+              { path: "/contact", label: "Contact Us" },
+            ].map((item) => (
+              <NavLink
+                key={item.path}
+                to={item.path}
+                className={({ isActive }) =>
+                  `px-4 py-2 rounded-xl transition-all duration-300 font-medium relative overflow-hidden group
+        ${
+          isActive
+            ? "text-amber-600 font-semibold bg-gradient-to-r from-amber-50 to-yellow-50 border border-amber-200 shadow-sm"
+            : "text-gray-600 hover:text-amber-700"
+        }`
+                }
+              >
+                {/* Hover background effect */}
+                <span className="relative z-10">{item.label}</span>
+                <span className="absolute inset-0 bg-gradient-to-r from-amber-50 to-yellow-50 translate-y-full group-hover:translate-y-0 transition-transform duration-300 rounded-xl"></span>
+
+                {/* Active state indicator */}
+                {({ isActive }) =>
+                  isActive && (
+                    <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1.5 h-1.5 bg-amber-500 rounded-full"></span>
+                  )
+                }
+              </NavLink>
+            ))}
+          </div>
 
           {/* Wishlist Icon */}
           <div className="relative group">
@@ -424,11 +454,9 @@ const Navbar = () => {
           </form>
         </div>
       )}
-
-      {/* ✅ ADDED: Mobile Menu - Shows when toggled */}
       {/* ✅ ADDED: Mobile Menu - Shows when toggled */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden border-t border-gray-100 bg-white">
+        <div className="w-[150px] lg:hidden border-t border-gray-100 bg-gray-600">
           <div className="px-6 py-4">
             <div className="space-y-3">
               <NavLink
@@ -439,11 +467,39 @@ const Navbar = () => {
             ${
               isActive
                 ? "text-amber-600 font-semibold bg-amber-50 border border-amber-200"
-                : "text-gray-600 hover:text-amber-700 hover:bg-amber-50"
+                : "text-gray-100 hover:text-amber-700 hover:bg-amber-50"
             }`
                 }
               >
                 Home
+              </NavLink>
+              <NavLink
+                to="/about"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className={({ isActive }) =>
+                  `block px-4 py-3 rounded-xl transition-all duration-300 font-medium text-center
+            ${
+              isActive
+                ? "text-amber-600 font-semibold bg-amber-50 border border-amber-200"
+                : "text-gray-100 hover:text-amber-700 hover:bg-amber-50"
+            }`
+                }
+              >
+                About
+              </NavLink>
+              <NavLink
+                to="/contact"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className={({ isActive }) =>
+                  `block px-4 py-3 rounded-xl transition-all duration-300 font-medium text-center
+            ${
+              isActive
+                ? "text-amber-600 font-semibold bg-amber-50 border border-amber-200"
+                : "text-gray-100 hover:text-amber-700 hover:bg-amber-50"
+            }`
+                }
+              >
+                Contact 
               </NavLink>
               <NavLink
                 to="/login"

@@ -319,7 +319,7 @@ const Homepage = () => {
                   to="/about"
                   className="border-2 border-amber-500 text-amber-500 px-6 py-3 rounded-lg font-semibold hover:bg-amber-500 hover:text-white transition-colors duration-300 hover:scale-105"
                 >
-                  Learn More
+                  About
                 </NavLink>
               </div>
             </div>
