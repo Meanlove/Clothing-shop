@@ -99,75 +99,90 @@ const Cart = () => {
     navigate("/all-collections");
   };
 
-  const proceedToCheckout = () => {
-    Swal.fire({
-      title: "Confirm Your Order?",
-      html: `
-        <div class="text-left">
-          <p class="mb-2"><strong>Items:</strong> ${getCartItemsCount()}</p>
-          <p class="mb-2"><strong>Subtotal:</strong> $${getSubtotal().toFixed(2)}</p>
-          <p class="mb-2"><strong>Shipping:</strong> FREE</p>
-          <p class="mb-4"><strong>Total:</strong> $${getTotal().toFixed(2)}</p>
-          <p class="text-sm text-gray-600">Please review your order before proceeding.</p>
-        </div>
-      `,
-      icon: "question",
-      showCancelButton: true,
-      confirmButtonText: "Yes, Proceed to Pay",
-      cancelButtonText: "Review Order",
-      confirmButtonColor: "green",
-      cancelButtonColor: "red",
-      reverseButtons: true,
-      draggable: true,
-      customClass: {
-        popup: "rounded-2xl",
-        confirmButton: "px-6 py-3 rounded-xl font-semibold",
-        cancelButton: "px-6 py-3 rounded-xl font-semibold",
-      },
-    }).then((result) => {
-      if (result.isConfirmed) {
+const proceedToCheckout = () => {
+  Swal.fire({
+    title: "Confirm Your Order?",
+    html: `
+      <div class="text-left">
+        <p class="mb-2"><strong>Items:</strong> ${getCartItemsCount()}</p>
+        <p class="mb-2"><strong>Subtotal:</strong> $${getSubtotal().toFixed(2)}</p>
+        <p class="mb-2"><strong>Shipping:</strong> FREE</p>
+        <p class="mb-4"><strong>Total:</strong> $${getTotal().toFixed(2)}</p>
+        <p class="text-sm text-gray-600">Please review your order before proceeding.</p>
+      </div>
+    `,
+    icon: "question",
+    showCancelButton: true,
+    confirmButtonText: "Yes, Proceed to Pay",
+    cancelButtonText: "Review Order",
+    confirmButtonColor: "green",
+    cancelButtonColor: "red",
+    reverseButtons: true,
+    draggable: true,
+    customClass: {
+      popup: "rounded-2xl",
+      confirmButton: "px-6 py-3 rounded-xl font-semibold",
+      cancelButton: "px-6 py-3 rounded-xl font-semibold",
+    },
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // Show redirecting message immediately when user confirms
+      Swal.fire({
+        title: "Redirecting...",
+        text: "Please wait while we process your payment",
+        icon: "info",
+        showConfirmButton: false,
+        allowOutsideClick: false,
+        timer: 2500, // 2.5 seconds
+        timerProgressBar: true,
+        didOpen: () => {
+          Swal.showLoading();
+        }
+      }).then(() => {
+        // After 2.5 seconds, process payment and show success message
         processPayment();
-      }
-    });
-  };
+      });
+    }
+  });
+};
 
-  const processPayment = () => {
-    Swal.fire({
-      title: "THANK YOU FOR YOUR PURCHASE!",
-      html: `
-        <div class="text-center">
-          <div class="mb-10">
-            <img 
-              src="https://www.gifcen.com/wp-content/uploads/2023/08/thank-you-gif-11.gif" 
-              alt="Success" 
-              class="w-80 h-80 mx-auto rounded-3xl object-cover shadow-2xl"
-            />
-          </div>
-          <p class="mb-8 text-4xl font-bold text-green-600">PAYMENT SUCCESSFUL!</p>
+const processPayment = () => {
+  Swal.fire({
+    title: "THANK YOU FOR YOUR PURCHASE!",
+    html: `
+      <div class="text-center">
+        <div class="mb-10">
+          <img 
+            src="https://www.gifcen.com/wp-content/uploads/2023/08/thank-you-gif-11.gif" 
+            alt="Success" 
+            class="w-80 h-80 mx-auto rounded-3xl object-cover shadow-2xl"
+          />
         </div>
-      `,
-      width: "900px",
-      padding: "5rem",
-      background: "linear-gradient(135deg, #f0fdf4 0%, #ffffff 50%, #f0f9ff 100%)",
-      showConfirmButton: true,
-      confirmButtonText: "CONTINUE SHOPPING",
-      confirmButtonColor: "#059669",
-      draggable: true,
-      customClass: {
-        popup: "rounded-4xl shadow-3xl border-4 border-green-100",
-        title: "text-5xl font-black text-gray-900 mb-8 tracking-wide",
-        confirmButton: "px-12 py-6 rounded-2xl font-black text-xl bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white hover:scale-110 transition-all duration-300 shadow-2xl hover:shadow-3xl",
-        htmlContainer: "text-2xl",
-        actions: "gap-6 mt-8"
-      },
-      buttonsStyling: false,
-    }).then((result) => {
-      if (result.isConfirmed) {
-        clearCart();
-        navigate("/all-collections");
-      }
-    });
-  };
+        <p class="mb-8 text-4xl font-bold text-green-600">PAYMENT SUCCESSFUL!</p>
+      </div>
+    `,
+    width: "900px",
+    padding: "5rem",
+    background: "linear-gradient(135deg, #f0fdf4 0%, #ffffff 50%, #f0f9ff 100%)",
+    showConfirmButton: true,
+    confirmButtonText: "CONTINUE SHOPPING",
+    confirmButtonColor: "#059669",
+    draggable: true,
+    customClass: {
+      popup: "rounded-4xl shadow-3xl border-4 border-green-100",
+      title: "text-5xl font-black text-gray-900 mb-8 tracking-wide",
+      confirmButton: "px-12 py-6 rounded-2xl font-black text-xl bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white hover:scale-110 transition-all duration-300 shadow-2xl hover:shadow-3xl",
+      htmlContainer: "text-2xl",
+      actions: "gap-6 mt-8"
+    },
+    buttonsStyling: false,
+  }).then((result) => {
+    if (result.isConfirmed) {
+      clearCart();
+      navigate("/all-collections");
+    }
+  });
+};
 
   // ✅ DEFINE AVAILABLE SIZES FOR EACH PRODUCT TYPE
   const getAvailableSizes = (category) => {

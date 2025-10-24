@@ -116,17 +116,17 @@ const Wishlist = () => {
               <FaHeart className="text-3xl text-pink-400" />
             </div>
             <h2 className="text-2xl font-bold text-gray-800 mb-4">
-              Aww ..Snap. Your favorite list is empty!
+              Aww ..Snap. You haven't added any store yet!
             </h2>
             <p className="text-gray-600 mb-8">
-              Start adding your favorite items to your wishlist!
+              Tap on <i class="fa-solid fa-heart text-red-600"></i> icon to add store to your Favorite list
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 to="/all-collections"
                 className="bg-gradient-to-r from-pink-500 to-rose-600 text-white px-8 py-3 rounded-xl font-semibold hover:from-pink-600 hover:to-rose-700 transition-all duration-300 hover:scale-105"
               >
-                Explore Products
+                ADD YOUR FAVORITE NOW !
               </Link>
               <Link
                 to="/"

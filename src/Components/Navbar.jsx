@@ -51,7 +51,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="fixed top-0 left-0 w-full bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-100 py-3 z-50">
+    <nav className="fixed top-0 left-0 w-full bg-gray-500 backdrop-blur-md shadow-sm border-b border-gray-100 py-3 z-50">
       <div className=" w-[95%] mx-auto flex justify-between items-center px-6">
         {/* ✅ Left: Logo & Navigation */}
         <div className="flex items-center space-x-8">
@@ -101,22 +101,21 @@ const Navbar = () => {
           </NavLink>
 
           {/* Navigation Links */}
-          <div className="hidden lg:flex items-center space-x-1">
+          <div className=" absolute left-120 hidden lg:flex items-center space-x-6">
             {[
-              { path: "/", label: "Home" },
               { path: "/men", label: "Men" },
               { path: "/women", label: "Women" },
-              { path: "/all-collections", label: "All Col" },
+              { path: "/all-collections", label: "All Collection" },
             ].map((item) => (
               <NavLink
                 key={item.path}
                 to={item.path}
                 className={({ isActive }) =>
-                  `px-4 py-2 rounded-xl transition-all duration-300 font-medium relative overflow-hidden group
+                  `px-4 py-2 rounded-xl transition-all duration-300 font-medium text-1xl relative overflow-hidden group
         ${
           isActive
-            ? "text-amber-600 font-semibold bg-gradient-to-r from-amber-50 to-yellow-50 border border-amber-200 shadow-sm"
-            : "text-gray-600 hover:text-amber-700"
+            ? "text-gray-800 font-semibold bg-gradient-to-r from-amber-50 to-yellow-50 border border-amber-200 shadow-sm"
+            : "text-white hover:text-gray-800"
         }`
                 }
               >
@@ -136,7 +135,7 @@ const Navbar = () => {
         </div>
 
         {/* ✅ Middle: Search Bar - FIXED FOR DESKTOP */}
-        <div className="hidden lg:block flex-1 max-w-lg mx-8">
+        <div className="absolute right-130 hidden lg:block flex-1 max-w-lg mx-8">
           <form onSubmit={handleSearchSubmit} className="relative group">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
               <svg
@@ -158,7 +157,7 @@ const Navbar = () => {
               placeholder="Search..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-[150px] bg-gray-50/80 backdrop-blur-sm rounded-2xl pl-10 pr-12 py-3 text-sm border border-gray-200/80 outline-none transition-all duration-300 focus:bg-white focus:border-amber-300 focus:ring-4 focus:ring-amber-100 focus:shadow-lg placeholder-gray-500"
+              className="w-[150px] bg-gray-50/80 backdrop-blur-sm rounded-2xl pl-10 pr-12 py-3 text-sm border border-gray-200/80 outline-none transition-all duration-300 focus:bg-white  focus:ring-4 focus:ring-white focus:shadow-lg placeholder-gray-500"
             />
             {/* Clear Button - Shows when there's text */}
             {searchTerm && (
@@ -185,7 +184,7 @@ const Navbar = () => {
             {/* Search Button */}
             <button
               type="submit"
-              className="absolute right-40 top-1/2 transform -translate-y-1/2 p-2 text-gray-400 hover:text-amber-500 transition-colors duration-300"
+              className="absolute right-2 top-1/2 transform -translate-y-1/2 p-2 text-gray-400 hover:text-amber-500 transition-colors duration-300"
             >
               <svg
                 className="w-4 h-4"
@@ -209,7 +208,7 @@ const Navbar = () => {
           {/* Mobile Search Toggle */}
           <button
             onClick={() => setIsSearchOpen(!isSearchOpen)}
-            className="lg:hidden p-2 rounded-xl text-gray-600 hover:text-amber-600 hover:bg-amber-50 transition-all duration-300"
+            className="lg:hidden p-2 rounded-xl text-white hover:text-gray-600 hover:bg-amber-50 transition-all duration-300"
           >
             <svg
               className="w-5 h-5"
@@ -237,8 +236,8 @@ const Navbar = () => {
                   `px-4 py-2 rounded-xl transition-all duration-300 font-medium relative overflow-hidden group
         ${
           isActive
-            ? "text-amber-600 font-semibold bg-gradient-to-r from-amber-50 to-yellow-50 border border-amber-200 shadow-sm"
-            : "text-gray-600 hover:text-amber-700"
+            ? "text-gray-800 font-semibold bg-gradient-to-r from-amber-50 to-yellow-50 border border-amber-200 shadow-sm"
+            : "text-white hover:text-gray-800"
         }`
                 }
               >
@@ -260,7 +259,13 @@ const Navbar = () => {
           <div className="relative group">
             <NavLink
               to="/wishlist"
-              className="p-2 rounded-xl text-gray-600 hover:text-amber-600 hover:bg-amber-50 transition-all duration-300 relative flex items-center hover:scale-105 active:scale-95"
+              className={({ isActive }) =>
+                `p-2 rounded-xl transition-all duration-300 relative flex items-center hover:scale-105 active:scale-95 ${
+                  isActive
+                    ? "text-pink-600 bg-amber-50 border border-amber-200"
+                    : "text-white hover:text-pink-600 hover:bg-amber-50"
+                }`
+              }
             >
               <FaHeart className="w-5 h-5" />
 
@@ -289,7 +294,13 @@ const Navbar = () => {
           <div className="relative group">
             <NavLink
               to="/cart"
-              className="p-2 rounded-xl text-gray-600 hover:text-amber-600 hover:bg-amber-50 transition-all duration-300 relative flex items-center hover:scale-105 active:scale-95"
+              className={({ isActive }) =>
+                `p-2 rounded-xl transition-all duration-300 relative flex items-center hover:scale-105 active:scale-95 ${
+                  isActive
+                    ? "text-gray-600 bg-amber-50 border border-amber-200"
+                    : "text-white hover:text-gray-600 hover:bg-amber-50"
+                }`
+              }
             >
               {/* Cart Icon from Font Awesome */}
               <i className="fa-solid fa-cart-shopping text-lg"></i>
@@ -330,30 +341,6 @@ const Navbar = () => {
               {/* Shine effect */}
               <span className="relative z-10">Login</span>
               <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></span>
-
-              {/* Active state indicator */}
-              {({ isActive }) =>
-                isActive && (
-                  <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-3 h-3 bg-white rounded-full animate-pulse"></span>
-                )
-              }
-            </NavLink>
-
-            <NavLink
-              to="/register"
-              className={({ isActive }) =>
-                `px-6 py-2 rounded-xl font-medium transition-all duration-300 relative overflow-hidden group shadow-lg
-      ${
-        isActive
-          ? "bg-gradient-to-r from-amber-500 to-amber-600 text-white shadow-xl scale-105"
-          : "bg-gradient-to-r from-amber-400 to-amber-500 text-white hover:from-amber-500 hover:to-amber-600 hover:shadow-xl hover:scale-105 active:scale-95"
-      }`
-              }
-            >
-              {/* Shine effect */}
-              <span className="relative z-10">Register</span>
-              <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></span>
-
               {/* Active state indicator */}
               {({ isActive }) =>
                 isActive && (
@@ -365,8 +352,12 @@ const Navbar = () => {
 
           {/* ✅ FIXED: Mobile Menu Button with onClick handler */}
           <button
-            onClick={toggleMobileMenu} // ✅ ADDED ONCLICK
-            className="lg:hidden p-2 rounded-xl text-gray-600 hover:text-amber-600 hover:bg-amber-50 transition-all duration-300"
+            onClick={toggleMobileMenu}
+            className={`lg:hidden p-2 rounded-xl transition-all duration-300 ${
+              isMobileMenuOpen
+                ? "text-gray-600 bg-amber-50 border border-white"
+                : "text-white hover:text-gray-600 hover:bg-amber-50"
+            }`}
           >
             <svg
               className="w-5 h-5"
@@ -433,7 +424,7 @@ const Navbar = () => {
                 </svg>
               </button>
             )}
-            <button
+            {/* <button
               type="submit"
               className="absolute right-2 top-1/2 transform -translate-y-1/2 p-2 text-gray-400 hover:text-amber-500"
             >
@@ -450,7 +441,7 @@ const Navbar = () => {
                   d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
                 />
               </svg>
-            </button>
+            </button> */}
           </form>
         </div>
       )}
@@ -499,7 +490,7 @@ const Navbar = () => {
             }`
                 }
               >
-                Contact 
+                Contact
               </NavLink>
               <NavLink
                 to="/login"
@@ -508,13 +499,13 @@ const Navbar = () => {
               >
                 Login
               </NavLink>
-              <NavLink
+              {/* <NavLink
                 to="/register"
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="block px-4 py-3 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-white font-medium text-center hover:from-amber-600 hover:to-amber-700 transition-all duration-300"
               >
                 Register
-              </NavLink>
+              </NavLink> */}
             </div>
           </div>
         </div>
@@ -528,13 +519,13 @@ const Navbar = () => {
               key={item}
               to={`/${item}`}
               className={({ isActive }) =>
-                `px-3 py-2 rounded-lg transition-all duration-300 text-sm font-medium
-                ${
-                  isActive
-                    ? "text-amber-600 font-semibold bg-amber-50"
-                    : "text-gray-600 hover:text-amber-700"
-                }`
-              }
+                  `px-4 py-2 rounded-xl transition-all duration-300 font-medium relative overflow-hidden group
+        ${
+          isActive
+            ? "text-gray-600 font-semibold bg-gradient-to-r from-amber-50 to-yellow-50 border border-amber-200 shadow-sm"
+            : "text-white hover:text-gray-600 hover:bg-white"
+        }`
+                }
             >
               {item.charAt(0).toUpperCase() + item.slice(1).replace("-", " ")}
             </NavLink>
