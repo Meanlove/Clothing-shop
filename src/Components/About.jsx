@@ -12,17 +12,17 @@ const About = () => {
 
   const values = [
     {
-      icon: "🎯",
+      icon: <i class="fa-solid fa-bullseye"></i>,
       title: "Our Mission",
       description: "To provide authentic Khmer fashion that celebrates Cambodian heritage while embracing modern style and comfort."
     },
     {
-      icon: "👁️",
+      icon: <i class="fa-solid fa-eye"></i>,
       title: "Our Vision",
       description: "To become the leading platform for Khmer fashion worldwide, connecting people with Cambodian culture through clothing."
     },
     {
-      icon: "❤️",
+      heart: <i class="fa-solid fa-heart"></i>,
       title: "Our Values",
       description: "Quality craftsmanship, cultural preservation, customer satisfaction, and sustainable practices guide everything we do."
     }
@@ -67,7 +67,7 @@ const About = () => {
               <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-gray-200">
                 <h2 className="text-3xl font-bold text-gray-800 mb-6">Our Story</h2>
                 <p className="text-lg text-gray-600 leading-relaxed mb-4">
-                  Welcome to <span className="font-semibold text-purple-600">Khmer Clothes</span> — 
+                  Welcome to <span className="font-semibold text-purple-600">Clothing Shop</span> — 
                   where traditional Cambodian craftsmanship meets modern fashion sensibilities. 
                   Founded with a passion for preserving our rich cultural heritage, we bring you 
                   authentic Khmer designs reimagined for today's world.
@@ -131,6 +131,7 @@ const About = () => {
             {values.map((value, index) => (
               <div key={index} className="bg-white rounded-2xl p-8 shadow-lg border border-gray-200 hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
                 <div className="text-4xl mb-4">{value.icon}</div>
+                <div className="text-4xl text-red-600 mb-4">{value.heart}</div>
                 <h3 className="text-xl font-bold text-gray-800 mb-4">{value.title}</h3>
                 <p className="text-gray-600 leading-relaxed">{value.description}</p>
               </div>

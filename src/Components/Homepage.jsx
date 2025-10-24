@@ -448,7 +448,7 @@ const Homepage = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex flex-col md:flex-row justify-between items-center">
               <div className="text-gray-400 mb-4 md:mb-0">
-                © 2024 CLOTHING SHOP. All rights reserved. Crafted with ❤️ for
+                © 2024 CLOTHING SHOP. All rights reserved. Crafted with <i class="fa-solid fa-heart text-red-600"></i> for
                 fashion lovers
               </div>
               <div className="flex gap-8 text-gray-400">
