@@ -101,15 +101,15 @@ const About = () => {
             <div className="relative">
               <div className="bg-gradient-to-br from-purple-500 to-blue-500 rounded-2xl p-1 shadow-2xl">
                 <img
-                  src="https://images.unsplash.com/photo-1581044777550-4cfa60707c03?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                  src="https://i.pinimg.com/736x/ef/71/b3/ef71b32c562a7405145e0d8417671cdf.jpg"
                   alt="TClothing shop"
-                  className="w-full h-96 object-cover rounded-2xl"
+                  className="w-full h-[630px] object-cover rounded-2xl"
                 />
               </div>
               <div className="absolute -bottom-6 -left-6 bg-white rounded-2xl p-6 shadow-xl border border-gray-200">
                 <FaQuoteLeft className="text-3xl text-purple-600 mb-3" />
                 <p className="text-gray-700 font-medium italic">
-                  "Keeping Khmer culture alive through fashion that honors our past while embracing our future."
+                  "Keeping Clothing Shop alive through fashion that honors our past while embracing our future."
                 </p>
               </div>
             </div>

@@ -398,49 +398,6 @@ const Homepage = () => {
               </div>
             </div>
           </div>
-
-          {/* Features Section */}
-          {/* <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mt-16 pt-12 border-t border-gray-700">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-amber-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-white font-bold text-2xl">🚚</span>
-              </div>
-              <h4 className="font-bold text-white text-lg mb-2">
-                Free Shipping
-              </h4>
-              <p className="text-gray-300">On all orders! </p>
-            </div>
-
-            <div className="text-center">
-              <div className="w-16 h-16 bg-amber-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-white font-bold text-2xl">🔒</span>
-              </div>
-              <h4 className="font-bold text-white text-lg mb-2">
-                Secure Payment
-              </h4>
-              <p className="text-gray-300">100% protected</p>
-            </div>
-
-            <div className="text-center">
-              <div className="w-16 h-16 bg-amber-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-white font-bold text-2xl">💎</span>
-              </div>
-              <h4 className="font-bold text-white text-lg mb-2">
-                Quality Products
-              </h4>
-              <p className="text-gray-300">Premium quality</p>
-            </div>
-
-            <div className="text-center">
-              <div className="w-16 h-16 bg-amber-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-white font-bold text-2xl">📞</span>
-              </div>
-              <h4 className="font-bold text-white text-lg mb-2">
-                24/7 Support
-              </h4>
-              <p className="text-gray-300">Always here to help</p>
-            </div>
-          </div> */}
         </div>
 
         {/* Bottom Footer */}

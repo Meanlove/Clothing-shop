@@ -171,8 +171,7 @@ const Register = () => {
               className="w-15 h-15 rounded-full border-2 border-gray-300 object-cover group-hover:border-amber-500 transition-colors duration-300"
               src="https://i.pinimg.com/1200x/7a/bf/2c/7abf2ca43b62487de9aa4cfc62686e84.jpg"
               alt="Fashion Store Logo"
-            />
-            CLOTHING SHOP
+            /><span className="font-bold text-3xl 2xl:text-2xl wave-text hidden sm:block">CLOTHING SHOP</span>
           </Link>
           
           <h1 className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">

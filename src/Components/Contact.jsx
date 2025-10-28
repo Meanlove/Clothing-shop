@@ -66,9 +66,9 @@ const Contact = () => {
         
         {/* Header Section */}
         <div className="text-center mb-16">
-          <h1 className="text-6xl font-black bg-gradient-to-r from-amber-600 via-orange-600 to-amber-700 bg-clip-text text-transparent mb-6">
-            Contact Us
-          </h1>
+          <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-purple-600 via-pink-500 to-blue-600 bg-clip-text text-transparent mb-6 animate-pulse">
+<span className="text-amber-500 animate-bounce inline-block">Contact Us</span>
+</h1>
           <p className="text-gray-700 text-xl max-w-3xl mx-auto leading-relaxed">
             We're here to help! Get in touch with our team for any questions about our fashion collections, 
             orders, or collaborations.

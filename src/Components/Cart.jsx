@@ -153,7 +153,7 @@ const processPayment = () => {
       <div class="text-center">
         <div class="mb-10">
           <img 
-            src="https://www.gifcen.com/wp-content/uploads/2023/08/thank-you-gif-11.gif" 
+            src="https://i.pinimg.com/originals/96/9c/3a/969c3a7d11ac4a0d6a5b73d90928603e.gif" 
             alt="Success" 
             class="w-80 h-80 mx-auto rounded-3xl object-cover shadow-2xl"
           />
