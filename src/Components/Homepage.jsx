@@ -399,7 +399,6 @@ const Homepage = () => {
             </div>
           </div>
         </div>
-
         {/* Bottom Footer */}
         <div className="border-t border-gray-700 py-6 bg-gray-800">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -435,5 +434,4 @@ const Homepage = () => {
     </div>
   );
 };
-
 export default Homepage;

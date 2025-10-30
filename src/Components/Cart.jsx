@@ -10,10 +10,12 @@ import {
   FaLock,
   FaTruck,
   FaShieldAlt,
-  FaHeart,
   FaHome,
   FaArrowRight,
-  FaChevronDown, // ✅ ADD THIS IMPORT
+  FaChevronDown,
+  FaQrcode,
+  FaCopy,
+  FaCheckCircle,
 } from "react-icons/fa";
 import { useCart } from "../context/CartContext";
 import Swal from "sweetalert2";
@@ -24,14 +26,14 @@ const Cart = () => {
     cartItems,
     removeFromCart,
     updateQuantity,
-    updateSize, // ✅ ADD THIS FUNCTION TO CART CONTEXT
+    updateSize,
     clearCart,
     getCartTotal,
     getCartItemsCount,
   } = useCart();
 
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [openSizeDropdowns, setOpenSizeDropdowns] = useState({}); // ✅ ADD STATE FOR DROPDOWNS
+  const [openSizeDropdowns, setOpenSizeDropdowns] = useState({});
 
   const heroSlides = [
     {
@@ -39,156 +41,367 @@ const Cart = () => {
         "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
       title: "Your Shopping Cart",
       subtitle: "Review your selected items and complete your order",
-      buttonText: "Continue Shopping",
     },
     {
       image:
         "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
       title: "Secure Checkout",
       subtitle: "Safe and encrypted payment processing",
-      buttonText: "Shop More",
     },
     {
       image:
         "https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
       title: "Fast Delivery",
       subtitle: "Free shipping on all orders",
-      buttonText: "Browse Collections",
     },
   ];
+
+  // Move functions before bankAccounts
+  const getSubtotal = () => getCartTotal();
+  const getShippingCost = () => 0;
+  const getTotal = () => getSubtotal() + getShippingCost();
+
+  // Bank account information - now using getTotal() after it's defined
+  const bankAccounts = {
+    aba: {
+      name: "ABA Bank",
+      accountName: "FASHION STORE CO., LTD",
+      accountNumber: "123 456 789",
+      qrCode: `https://i.pinimg.com/736x/81/58/84/8158842fe3e81efce11db9336498f7ef.jpg`,
+      color: "from-blue-500 to-blue-600",
+      icon: "🏦",
+      instructions: [
+        "Open ABA Mobile App",
+        "Tap 'Transfer' or 'Scan & Pay'",
+        "Scan the QR code above",
+        `Verify amount: $${getTotal().toFixed(2)}`,
+        "Confirm payment",
+      ],
+    },
+    acleda: {
+      name: "ACLEDA Bank",
+      accountName: "FASHION STORE CO., LTD",
+      accountNumber: "987 654 321",
+      qrCode: `/image/qr-code/ac-qr.png`,
+      color: "from-green-500 to-green-600",
+      icon: "🏦",
+      instructions: [
+        "Open ACLEDA Mobile App",
+        "Select 'Quick Transfer'",
+        "Scan QR Code or enter account number",
+        `Amount: $${getTotal().toFixed(2)}`,
+        "Complete transaction",
+      ],
+    },
+    wing: {
+      name: "Wing",
+      accountName: "FASHION STORE",
+      accountNumber: "012 345 678",
+      qrCode: `/image/qr-code/wing-qr.png`,
+      color: "from-orange-500 to-orange-600",
+      icon: "💸",
+      instructions: [
+        "Open Wing App",
+        "Tap 'Pay Bill' or 'Scan to Pay'",
+        "Scan QR Code",
+        `Amount: $${getTotal().toFixed(2)}`,
+        "Enter PIN to confirm",
+      ],
+    },
+  };
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
     }, 5000);
     return () => clearInterval(interval);
-  }, []);
+  }, [heroSlides.length]);
 
-  // ✅ ADD SIZE DROPDOWN TOGGLE HANDLER
-  const toggleSizeDropdown = (itemId, size) => {
-    setOpenSizeDropdowns(prev => ({
+  const toggleSizeDropdown = (itemId) => {
+    setOpenSizeDropdowns((prev) => ({
       ...prev,
-      [itemId]: !prev[itemId]
+      [itemId]: !prev[itemId],
     }));
   };
 
-  // ✅ ADD SIZE UPDATE HANDLER
   const handleSizeUpdate = (itemId, currentSize, newSize) => {
     if (currentSize !== newSize) {
       updateSize(itemId, currentSize, newSize);
     }
-    setOpenSizeDropdowns(prev => ({
+    setOpenSizeDropdowns((prev) => ({
       ...prev,
-      [itemId]: false
+      [itemId]: false,
     }));
   };
 
-  const getSubtotal = () => {
-    return getCartTotal();
+  const continueShopping = () => navigate("/all-collections");
+
+  const proceedToCheckout = () => {
+    Swal.fire({
+      title: "Select Payment Method",
+      html: `
+        <div style="text-align: left;">
+          <div style="margin-bottom: 1rem; padding: 1rem; background: linear-gradient(to right, #dbeafe, #f3e8ff); border-radius: 1rem; border: 1px solid #bfdbfe;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <p style="font-size: 1.125rem; font-weight: bold; color: #1f2937;">$${getTotal().toFixed(
+                  2
+                )}</p>
+                <p style="font-size: 0.875rem; color: #6b7280;">${getCartItemsCount()} items</p>
+              </div>
+              <div style="width: 2.5rem; height: 2.5rem; background-color: #10b981; border-radius: 9999px; display: flex; align-items: center; justify-content: center;">
+                <svg style="width: 1.25rem; height: 1.25rem; color: white;" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+          
+          <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+            <div class="payment-option group" data-method="aba">
+              <div style="display: flex; align-items: center; gap: 1rem; padding: 1rem; border-radius: 1rem; border: 2px solid #e5e7eb; cursor: pointer; transition: all 0.3s;">
+                <img src="https://i.pinimg.com/1200x/e2/33/f5/e233f5b0c5a358449398f202b03f063a.jpg" alt="ABA Bank" style="width: 3rem; height: 3rem; border-radius: 0.75rem; object-fit: contain; background-color: white; padding: 0.5rem; box-shadow: 0 2px 6px rgba(0,0,0,0.1);"/>
+                <div style="flex: 1;">
+                  <div style="font-weight: 600; color: #1f2937;">ABA PayWay</div>
+                  <div style="font-size: 0.875rem; color: #6b7280;">Instant bank transfer</div>
+                </div>
+                <input type="radio" name="payment" value="aba" style="width: 1.25rem; height: 1.25rem; color: #2563eb;" checked>
+              </div>
+            </div>
+
+            <div class="payment-option group" data-method="acleda">
+              <div style="display: flex; align-items: center; gap: 1rem; padding: 1rem; border-radius: 1rem; border: 2px solid #e5e7eb; cursor: pointer; transition: all 0.3s;">
+              <img src="https://i.pinimg.com/736x/8e/3a/11/8e3a117e5f1a302aba60c1f6f3e3c64e.jpg" alt="ACLEDA Bank" style="width: 3rem; height: 3rem; border-radius: 0.75rem; object-fit: contain; background-color: white; padding: 0.5rem; box-shadow: 0 2px 6px rgba(0,0,0,0.1);"/>
+                <div style="flex: 1;">
+                  <div style="font-weight: 600; color: #1f2937;">ACLEDA Bank</div>
+                  <div style="font-size: 0.875rem; color: #6b7280;">Bank transfer</div>
+                </div>
+                <input type="radio" name="payment" value="acleda" style="width: 1.25rem; height: 1.25rem; color: #2563eb;">
+              </div>
+            </div>
+
+            <div class="payment-option group" data-method="wing">
+              <div style="display: flex; align-items: center; gap: 1rem; padding: 1rem; border-radius: 1rem; border: 2px solid #e5e7eb; cursor: pointer; transition: all 0.3s;">
+                <img src="https://i.pinimg.com/736x/82/a2/eb/82a2eb0b52db2151ff259ad54be6301d.jpg" alt="Wing" style="width: 3rem; height: 3rem; border-radius: 0.75rem; object-fit: contain; background-color: white; padding: 0.5rem; box-shadow: 0 2px 6px rgba(0,0,0,0.1);"/>
+                <div style="flex: 1;">
+                  <div style="font-weight: 600; color: #1f2937;">Wing</div>
+                  <div style="font-size: 0.875rem; color: #6b7280;">Mobile payment</div>
+                </div>
+                <input type="radio" name="payment" value="wing" style="width: 1.25rem; height: 1.25rem; color: #2563eb;">
+              </div>
+            </div>
+          </div>
+        </div>
+      `,
+      width: 500,
+      showCancelButton: true,
+      confirmButtonText: "Continue to Pay",
+      cancelButtonText: "Cancel",
+      confirmButtonColor: "#2563eb",
+      cancelButtonColor: "#6b7280",
+      customClass: {
+        popup: "rounded-3xl",
+        confirmButton: "px-8 py-3 rounded-xl font-semibold shadow-lg",
+        cancelButton: "px-8 py-3 rounded-xl font-semibold",
+      },
+      didOpen: () => {
+        const paymentOptions = document.querySelectorAll(".payment-option");
+        paymentOptions.forEach((option) => {
+          option.addEventListener("click", function () {
+            const radio = this.querySelector('input[type="radio"]');
+            radio.checked = true;
+
+            paymentOptions.forEach((opt) => {
+              const div = opt.querySelector("div");
+              div.style.borderColor = "#e5e7eb";
+              div.style.background = "transparent";
+            });
+
+            const selectedDiv = this.querySelector("div");
+            selectedDiv.style.borderColor = "#3b82f6";
+            selectedDiv.style.background = "#f0f9ff";
+          });
+        });
+
+        if (paymentOptions[0]) {
+          const firstDiv = paymentOptions[0].querySelector("div");
+          firstDiv.style.borderColor = "#3b82f6";
+          firstDiv.style.background = "#f0f9ff";
+        }
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const selectedPayment = document.querySelector(
+          'input[name="payment"]:checked'
+        ).value;
+        if (selectedPayment === "credit") {
+          processCardPayment();
+        } else {
+          showBankPayment(selectedPayment);
+        }
+      }
+    });
   };
 
-  const getShippingCost = () => {
-    return 0;
-  };
+  const showBankPayment = (bankType) => {
+    const bank = bankAccounts[bankType];
 
-  const getTotal = () => {
-    return getSubtotal() + getShippingCost();
-  };
-
-  const continueShopping = () => {
-    navigate("/all-collections");
-  };
-
-const proceedToCheckout = () => {
-  Swal.fire({
-    title: "Confirm Your Order?",
-    html: `
-      <div class="text-left">
-        <p class="mb-2"><strong>Items:</strong> ${getCartItemsCount()}</p>
-        <p class="mb-2"><strong>Subtotal:</strong> $${getSubtotal().toFixed(2)}</p>
-        <p class="mb-2"><strong>Shipping:</strong> FREE</p>
-        <p class="mb-4"><strong>Total:</strong> $${getTotal().toFixed(2)}</p>
-        <p class="text-sm text-gray-600">Please review your order before proceeding.</p>
+    Swal.fire({
+      html: `
+      <div style="text-align: center;">
+       <div style="margin-bottom: 1.5rem; padding: 1.5rem; background: linear-gradient(to right, ${
+  bank.name === "ABA Bank" 
+    ? "#0066b3, #004a8f"  // ✅ ABA Bank colors (blue)
+    : bank.name === "ACLEDA Bank" 
+    ? "#1F1054, #1A0D47"  // ✅ ACLEDA Bank colors (green) 
+    : "#24B329, #22B317"  // ✅ Wing colors (orange)
+}); border-radius: 1.5rem; color: white; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); display: inline-block; width: auto; min-width: 200px; max-width: 300px;">
+  <h3 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 0.5rem; text-align: center;">${
+    bank.name
+  }</h3>
+  <p style="font-size: 1.25rem; text-align: center;">$${getTotal().toFixed(
+    2
+  )}</p>
+  <p style="font-size: 0.875rem; opacity: 0.9; text-align: center;">Total Amount</p>
+</div>
+        
+        <!-- QR Code Section - Moved to TOP -->
+        <div style="text-align: center; margin-bottom: 2rem;">
+          <h4 style="font-weight: 600; color: #1f2937; margin-bottom: 1rem; font-size: 1.125rem;">Scan QR Code to Pay</h4>
+          <div style="background-color: white; padding: 1.5rem; border-radius: 1rem; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); display: inline-block; border: 2px solid #f3f4f6;">
+            <img src="${
+              bank.qrCode
+            }" alt="QR Code" style="width: 18rem; height: 18rem; border-radius: 0.5rem;"/>
+          </div>
+          <p style="font-size: 0.875rem; color: #6b7280; margin-top: 0.75rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+            <svg style="width: 1rem; height: 1rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"/>
+            </svg>
+            Scan with your banking app
+          </p>
+        </div>
+ 
       </div>
     `,
-    icon: "question",
-    showCancelButton: true,
-    confirmButtonText: "Yes, Proceed to Pay",
-    cancelButtonText: "Review Order",
-    confirmButtonColor: "green",
-    cancelButtonColor: "red",
-    reverseButtons: true,
-    draggable: true,
-    customClass: {
-      popup: "rounded-2xl",
-      confirmButton: "px-6 py-3 rounded-xl font-semibold",
-      cancelButton: "px-6 py-3 rounded-xl font-semibold",
-    },
-  }).then((result) => {
-    if (result.isConfirmed) {
-      // Show redirecting message immediately when user confirms
-      Swal.fire({
-        title: "Redirecting...",
-        text: "Please wait while we process your payment",
-        icon: "info",
-        showConfirmButton: false,
-        allowOutsideClick: false,
-        timer: 2500, // 2.5 seconds
-        timerProgressBar: true,
-        didOpen: () => {
-          Swal.showLoading();
-        }
-      }).then(() => {
-        // After 2.5 seconds, process payment and show success message
-        processPayment();
-      });
-    }
-  });
-};
+      width: 800,
+      showCancelButton: true,
+      confirmButtonText: "I Have Completed Payment",
+      cancelButtonText: "Cancel",
+      confirmButtonColor: "#10b981",
+      cancelButtonColor: "#6b7280",
+      customClass: {
+        popup: "rounded-3xl",
+        confirmButton: "px-8 py-3 rounded-xl font-semibold shadow-lg",
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        verifyPayment(bankType);
+      }
+    });
+  };
 
-const processPayment = () => {
-  Swal.fire({
-    title: "THANK YOU FOR YOUR PURCHASE!",
-    html: `
-      <div class="text-center">
-        <div class="mb-10">
+  const verifyPayment = (bankType) => {
+    Swal.fire({
+      title: "Processing Payment",
+      html: `
+      <div style="text-align: center;">
+        <div style="margin-bottom: 1.5rem;">
+          <div style="width: 6rem; height: 6rem; margin: 0 auto; background: linear-gradient(to right, #3b82f6, #8b5cf6); border-radius: 9999px; display: flex; align-items: center; justify-content: center;">
+            <svg style="width: 3rem; height: 3rem; color: white; animation: spin 1s linear infinite;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2a10 10 0 100 20 10 10 0 000-20z"/>
+            </svg>
+          </div>
+        </div>
+        <p style="font-size: 1.25rem; font-weight: 600; color: #374151; margin-bottom: 0.5rem;">Verifying Your Payment</p>
+        <p style="color: #6b7280;">Please wait while we confirm your transaction</p>
+        <div style="margin-top: 1rem; background-color: #fef3c7; border: 1px solid #fcd34d; border-radius: 0.75rem; padding: 1rem;">
+          <p style="font-size: 0.875rem; color: #92400e;">This usually takes a few moments...</p>
+        </div>
+      </div>
+    `,
+      showConfirmButton: false,
+      allowOutsideClick: false,
+      timer: 2500, // 2.5 seconds
+      timerProgressBar: true,
+      didOpen: () => {
+        Swal.showLoading();
+      },
+    }).then(() => {
+      showPaymentSuccess(bankType);
+    });
+  };
+
+  const showPaymentSuccess = (paymentMethod) => {
+    const methodName =
+      paymentMethod === "credit"
+        ? "Credit/Debit Card"
+        : bankAccounts[paymentMethod]?.name;
+    const orderId = `FS${Date.now().toString().slice(-8)}`;
+
+    // Use your local GIF file
+    const yourGifUrl =
+      "https://i.pinimg.com/originals/96/9c/3a/969c3a7d11ac4a0d6a5b73d90928603e.gif"; // ឬ path របស់ GIF នៅក្នុង project អ្នក
+
+    Swal.fire({
+      title: "🎉 Payment Successful!",
+      html: `
+      <div style="text-align: center;">
+        <div style="margin-bottom: 1.5rem;">
           <img 
-            src="https://i.pinimg.com/originals/96/9c/3a/969c3a7d11ac4a0d6a5b73d90928603e.gif" 
-            alt="Success" 
-            class="w-80 h-80 mx-auto rounded-3xl object-cover shadow-2xl"
+            src="${yourGifUrl}" 
+            alt="Success Celebration" 
+            style="width: 200px; height: 200px; border-radius: 1rem; object-fit: cover; margin: 0 auto; box-shadow: 0 10px 25px rgba(0,0,0,0.1);"
           />
         </div>
-        <p class="mb-8 text-4xl font-bold text-green-600">PAYMENT SUCCESSFUL!</p>
+        
+        <div style="background: linear-gradient(to right, #d1fae5, #bbf7d0); border: 1px solid #a7f3d0; border-radius: 1rem; padding: 1.5rem; margin-bottom: 1.5rem;">
+          <div style="display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.875rem;">
+            <div style="display: flex; justify-content: space-between;">
+              <span style="color: #374151;">Order ID:</span>
+              <span style="font-family: monospace; font-weight: bold; color: #1f2937;">${orderId}</span>
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+              <span style="color: #374151;">Payment Method:</span>
+              <span style="font-weight: 600; color: #059669;">${methodName}</span>
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+              <span style="color: #374151;">Amount Paid:</span>
+              <span style="font-weight: bold; font-size: 1.125rem; color: #059669;">$${getTotal().toFixed(
+                2
+              )}</span>
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+              <span style="color: #374151;">Items:</span>
+              <span style="font-weight: 600;">${getCartItemsCount()} products</span>
+            </div>
+          </div>
+        </div>
+        
+        <p style="color: #6b7280; margin-bottom: 0.5rem; font-size: 1.125rem; font-weight: 500;">Thank you for your purchase! 🎊</p>
+        <p style="font-size: 0.875rem; color: #9ca3af;">Your order will be processed and shipped within 24 hours.</p>
       </div>
     `,
-    width: "900px",
-    padding: "5rem",
-    background: "linear-gradient(135deg, #f0fdf4 0%, #ffffff 50%, #f0f9ff 100%)",
-    showConfirmButton: true,
-    confirmButtonText: "CONTINUE SHOPPING",
-    confirmButtonColor: "#059669",
-    draggable: true,
-    customClass: {
-      popup: "rounded-4xl shadow-3xl border-4 border-green-100",
-      title: "text-5xl font-black text-gray-900 mb-8 tracking-wide",
-      confirmButton: "px-12 py-6 rounded-2xl font-black text-xl bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white hover:scale-110 transition-all duration-300 shadow-2xl hover:shadow-3xl",
-      htmlContainer: "text-2xl",
-      actions: "gap-6 mt-8"
-    },
-    buttonsStyling: false,
-  }).then((result) => {
-    if (result.isConfirmed) {
-      clearCart();
-      navigate("/all-collections");
-    }
-  });
-};
+      width: 500,
+      confirmButtonText: "Continue Shopping",
+      confirmButtonColor: "#10b981",
+      customClass: {
+        popup: "rounded-3xl",
+        title: "text-2xl font-bold text-gray-800 mb-2",
+        confirmButton:
+          "px-8 py-3 rounded-xl font-semibold text-white bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 transition-all duration-300 shadow-lg",
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        clearCart();
+        navigate("/all-collections");
+      }
+    });
+  };
 
-  // ✅ DEFINE AVAILABLE SIZES FOR EACH PRODUCT TYPE
   const getAvailableSizes = (category) => {
     switch (category) {
       case "men's clothing":
-        return ["S", "M", "L", "XL",];
+        return ["S", "M", "L", "XL"];
       case "women's clothing":
         return ["S", "M", "L", "XL"];
       default:
@@ -196,12 +409,10 @@ const processPayment = () => {
     }
   };
 
-if (cartItems.length === 0) {
+  if (cartItems.length === 0) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
-        {/* Hero Header for Empty Cart */}
         <section className="relative h-96 overflow-hidden">
-          {/* Background Slides */}
           {heroSlides.map((slide, index) => (
             <div
               key={index}
@@ -218,7 +429,6 @@ if (cartItems.length === 0) {
             </div>
           ))}
 
-          {/* Navigation Dots */}
           <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-3 z-20">
             {heroSlides.map((_, index) => (
               <button
@@ -233,7 +443,6 @@ if (cartItems.length === 0) {
             ))}
           </div>
 
-          {/* Hero Content */}
           <div className="relative z-10 h-full flex items-center justify-center text-center px-4">
             <div className="max-w-4xl">
               <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white to-gray-200 bg-clip-text text-transparent">
@@ -256,10 +465,8 @@ if (cartItems.length === 0) {
           </div>
         </section>
 
-        {/* Empty Cart Content */}
         <div className="py-10 px-4 sm:px-6">
           <div className="max-w-4xl mx-auto">
-            {/* Empty Cart Message */}
             <div className="bg-white rounded-3xl shadow-lg p-12 text-center">
               <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
                 <FaShoppingBag className="text-3xl text-gray-400" />
@@ -288,7 +495,6 @@ if (cartItems.length === 0) {
               </div>
             </div>
 
-            {/* Quick Links to Collections */}
             <div className="mt-12">
               <h3 className="text-2xl font-bold text-gray-800 mb-6 text-center">
                 Popular Collections
@@ -327,18 +533,39 @@ if (cartItems.length === 0) {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
-      {/* Hero Header for Cart with Items */}
       <section className="relative h-64 overflow-hidden">
-        {/* ... (hero section code remains the same) */}
+        {heroSlides.map((slide, index) => (
+          <div
+            key={index}
+            className={`absolute inset-0 transition-opacity duration-1000 ${
+              index === currentSlide ? "opacity-100" : "opacity-0"
+            }`}
+          >
+            <img
+              src={slide.image}
+              alt={slide.title}
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/20"></div>
+          </div>
+        ))}
+
+        <div className="relative z-10 h-full flex items-center justify-center text-center px-4">
+          <div className="max-w-4xl">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-white to-gray-200 bg-clip-text text-transparent">
+              Shopping Cart
+            </h1>
+            <p className="text-lg md:text-xl text-gray-200">
+              Review your items and proceed to checkout
+            </p>
+          </div>
+        </div>
       </section>
 
-      {/* Cart Content */}
       <div className="py-10 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Cart Items */}
             <div className="lg:col-span-2">
-              {/* Cart Header */}
               <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 mb-6">
                 <div className="flex justify-between items-center">
                   <h2 className="text-xl font-bold text-gray-800">
@@ -354,15 +581,13 @@ if (cartItems.length === 0) {
                 </div>
               </div>
 
-              {/* Cart Items List */}
               <div className="space-y-4">
                 {cartItems.map((item) => (
                   <div
-                    key={`${item.id}-${item.size || 'no-size'}`}
+                    key={`${item.id}-${item.size || "no-size"}`}
                     className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow duration-300"
                   >
                     <div className="flex flex-col sm:flex-row gap-4">
-                      {/* Product Image */}
                       <div className="flex-shrink-0">
                         <img
                           src={item.image}
@@ -371,7 +596,6 @@ if (cartItems.length === 0) {
                         />
                       </div>
 
-                      {/* Product Details */}
                       <div className="flex-grow">
                         <div className="flex justify-between items-start mb-2">
                           <div>
@@ -381,37 +605,51 @@ if (cartItems.length === 0) {
                             <p className="text-gray-600 text-sm capitalize">
                               {item.category}
                             </p>
-                            
-                            {/* ✅ UPDATED SIZE SELECTOR IN CART */}
+
                             <div className="mt-2">
                               <div className="flex items-center gap-3">
-                                <span className="text-sm text-gray-600">Size:</span>
+                                <span className="text-sm text-gray-600">
+                                  Size:
+                                </span>
                                 <div className="relative">
                                   <button
-                                    onClick={() => toggleSizeDropdown(item.id, item.size)}
+                                    onClick={() => toggleSizeDropdown(item.id)}
                                     className="flex items-center gap-2 bg-gray-50 border border-gray-300 rounded-lg px-3 py-1 text-sm font-medium text-gray-700 hover:bg-gray-100 transition-colors duration-200"
                                   >
                                     <span>{item.size}</span>
-                                    <FaChevronDown className={`text-xs transition-transform duration-200 ${openSizeDropdowns[item.id] ? 'rotate-180' : ''}`} />
+                                    <FaChevronDown
+                                      className={`text-xs transition-transform duration-200 ${
+                                        openSizeDropdowns[item.id]
+                                          ? "rotate-180"
+                                          : ""
+                                      }`}
+                                    />
                                   </button>
-                                  
-                                  {/* Size Dropdown */}
+
                                   {openSizeDropdowns[item.id] && (
                                     <div className="absolute top-full left-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-10 p-2 min-w-[80px]">
                                       <div className="flex flex-col gap-1">
-                                        {getAvailableSizes(item.category).map((size) => (
-                                          <button
-                                            key={size}
-                                            onClick={() => handleSizeUpdate(item.id, item.size, size)}
-                                            className={`px-2 py-1 text-sm rounded-md transition-colors duration-200 text-left ${
-                                              item.size === size
-                                                ? 'bg-blue-600 text-white'
-                                                : 'text-gray-700 hover:bg-blue-50'
-                                            }`}
-                                          >
-                                            {size}
-                                          </button>
-                                        ))}
+                                        {getAvailableSizes(item.category).map(
+                                          (size) => (
+                                            <button
+                                              key={size}
+                                              onClick={() =>
+                                                handleSizeUpdate(
+                                                  item.id,
+                                                  item.size,
+                                                  size
+                                                )
+                                              }
+                                              className={`px-2 py-1 text-sm rounded-md transition-colors duration-200 text-left ${
+                                                item.size === size
+                                                  ? "bg-blue-600 text-white"
+                                                  : "text-gray-700 hover:bg-blue-50"
+                                              }`}
+                                            >
+                                              {size}
+                                            </button>
+                                          )
+                                        )}
                                       </div>
                                     </div>
                                   )}
@@ -430,12 +668,15 @@ if (cartItems.length === 0) {
                           </div>
                         </div>
 
-                        {/* Quantity and Price */}
                         <div className="flex justify-between items-center">
                           <div className="flex items-center gap-3">
                             <button
                               onClick={() =>
-                                updateQuantity(item.id, item.quantity - 1, item.size)
+                                updateQuantity(
+                                  item.id,
+                                  item.quantity - 1,
+                                  item.size
+                                )
                               }
                               className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center hover:bg-gray-200 transition-colors duration-300"
                             >
@@ -446,7 +687,11 @@ if (cartItems.length === 0) {
                             </span>
                             <button
                               onClick={() =>
-                                updateQuantity(item.id, item.quantity + 1, item.size)
+                                updateQuantity(
+                                  item.id,
+                                  item.quantity + 1,
+                                  item.size
+                                )
                               }
                               className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center hover:bg-gray-200 transition-colors duration-300"
                             >
@@ -470,7 +715,6 @@ if (cartItems.length === 0) {
                 ))}
               </div>
 
-              {/* Trust Badges */}
               <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 mt-6">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
                   <div className="flex flex-col items-center">
@@ -502,14 +746,12 @@ if (cartItems.length === 0) {
               </div>
             </div>
 
-            {/* Order Summary */}
             <div className="lg:col-span-1">
               <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 sticky top-24">
                 <h2 className="text-xl font-bold text-gray-800 mb-6">
                   Order Summary
                 </h2>
 
-                {/* Pricing Breakdown */}
                 <div className="space-y-3 mb-6">
                   <div className="flex justify-between text-gray-600">
                     <span>Subtotal ({getCartItemsCount()} items)</span>
@@ -527,16 +769,14 @@ if (cartItems.length === 0) {
                   </div>
                 </div>
 
-                {/* Checkout Button */}
                 <button
                   onClick={proceedToCheckout}
-                  className="w-full bg-gradient-to-r from-green-600 to-green-700 text-white py-4 rounded-xl font-semibold hover:from-green-700 hover:to-green-800 transition-all duration-300 hover:shadow-lg mb-4 flex items-center justify-center gap-2"
+                  className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white py-4 rounded-xl font-semibold hover:from-blue-700 hover:to-blue-800 transition-all duration-300 hover:shadow-lg mb-4 flex items-center justify-center gap-2"
                 >
                   <FaCreditCard />
                   Proceed to Checkout
                 </button>
 
-                {/* Security Notice */}
                 <div className="text-center">
                   <div className="flex items-center justify-center gap-2 text-sm text-gray-500 mb-2">
                     <FaLock className="text-xs" />
@@ -548,7 +788,6 @@ if (cartItems.length === 0) {
                   </p>
                 </div>
 
-                {/* Payment Methods */}
                 <div className="border-t border-gray-200 mt-6 pt-6">
                   <p className="text-sm text-gray-600 mb-3">We accept:</p>
                   <div className="flex gap-3">
