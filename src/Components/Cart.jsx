@@ -795,7 +795,7 @@ const Cart = () => {
                       (method) => (
                         <div
                           key={method}
-                          className="w-12 h-8 bg-gray-100 rounded-lg flex items-center justify-center text-xs font-medium text-gray-600"
+                          className="w-20 h-8 bg-gray-100 rounded-lg flex items-center justify-center text-xs font-medium text-gray-600"
                         >
                           {method}
                         </div>
